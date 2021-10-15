@@ -15,8 +15,9 @@ public final class BottomSheetView: UIView {
   /// The sizing style of the sheet.
   public var sheetSizingStyle: SheetSizingStyle
     
+    public var KlapConfig: [String: Any]
   /// The corner radius of the bottom sheet.
-  public var cornerRadius: CGFloat = 16 {
+  public var cornerRadius: CGFloat = 32 {
     willSet {
       layer.cornerRadius = newValue
     }
@@ -94,7 +95,7 @@ public final class BottomSheetView: UIView {
   private lazy var dragHandle: UIView = {
     let view = UIView()
     view.backgroundColor = dragHandleColor
-    view.layer.cornerRadius = 2
+    view.layer.cornerRadius = 32
     return view
   }()
   
@@ -120,9 +121,18 @@ public final class BottomSheetView: UIView {
   ///   - sheetSizingStyle: The sizing style of the bottom sheet. Defaults to `toSafeAreaTop`.
   ///   - handleStyle: The handle style of the bottom sheet. Defaults to `none`.
   public init(sheetSizingStyle: SheetSizingStyle = .toSafeAreaTop, handleStyle: HandleStyle = .none) {
-    self.sheetSizingStyle = sheetSizingStyle
-    self.handleStyle = handleStyle
-    
+    self.sheetSizingStyle = .toSafeAreaTop
+    self.handleStyle = .outside
+    let jsonObject: [String: Any] = [
+        "key": "xxxx",
+        "Envirment":"SendBox",
+        "title":"Content Titlew",
+        "klapz":2,
+        "createrID":"createrID",
+        "Url":"",
+        "Mode":"Default"
+    ]
+    self.KlapConfig = jsonObject
     super.init(frame: .zero)
     
     setup()
@@ -131,7 +141,16 @@ public final class BottomSheetView: UIView {
   
   public required init?(coder: NSCoder) {
     self.sheetSizingStyle = .toSafeAreaTop
-    
+    let jsonObject: [String: Any] = [
+        "key": "xxxx",
+        "Envirment":"SendBox",
+        "title":"Content Titlew",
+        "klapz":2,
+        "createrID":"createrID",
+        "Url":"",
+        "Mode":"Default"
+    ]
+    self.KlapConfig = jsonObject
     super.init(coder: coder)
     
     setup()
