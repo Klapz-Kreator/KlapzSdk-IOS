@@ -47,14 +47,27 @@ public final class BottomSheetViewController: UIViewController {
     set { bottomSheetView.contentInsets = newValue }
   }
   
+    public var KlapConfig: [String: Any] {
+      get { bottomSheetView.KlapConfig }
+      set { bottomSheetView.KlapConfig = newValue }
+    }
+    
   // MARK: - Init
   
   /// Creates a `BottomSheetViewController` with the specified content view.
   /// - Parameter contentView: The content view to place into the bottom sheet.
-  public convenience init(contentView: UIView) {
+  public convenience init() {
     self.init(nibName: nil, bundle: nil)
     
-    self.contentView = contentView
+    if #available(iOS 13.0, *) {
+        self.contentView = ExampleBottomSheetView()
+        sheetCornerRadius = 32
+        sheetSizingStyle = .toSafeAreaTop
+        handleStyle = .outside
+        contentInsets = UIEdgeInsets(top: 24, left: 24, bottom: 24, right: 24)
+    } else {
+        // Fallback on earlier versions
+    }
     
     setup()
   }
