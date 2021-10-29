@@ -3,7 +3,7 @@
     "pins": [
       {
         "package": "CountryPickerView",
-        "repositoryURL": "https://github.com/kizitonwose/CountryPickerView.git",
+        "repositoryURL": "https://github.com/kizitonwose/CountryPickerView",
         "state": {
           "branch": null,
           "revision": "6ecf22145d577411fb97c8c964df0fb5886f035f",
@@ -12,7 +12,7 @@
       },
       {
         "package": "MultilineTextField",
-        "repositoryURL": "https://github.com/rlaguilar/MultilineTextField.git",
+        "repositoryURL": "https://github.com/rlaguilar/MultilineTextField",
         "state": {
           "branch": null,
           "revision": "9656eb1aaf13ec355f0d2b7fe3d2b5ffe2c2b318",
@@ -21,7 +21,7 @@
       },
       {
         "package": "NKVPhonePicker",
-        "repositoryURL": "https://github.com/NikKovIos/NKVPhonePicker.git",
+        "repositoryURL": "https://github.com/NikKovIos/NKVPhonePicker",
         "state": {
           "branch": null,
           "revision": "8e6d2a74217a2249e272d6a1f26d0e28a0f5cf9d",

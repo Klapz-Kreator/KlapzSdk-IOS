@@ -42,7 +42,7 @@ public final class KlapzController: UIViewController {
   }
   
   @objc private func didPressButton(_ sender: UIButton) {
-    let controller = BottomSheetViewController(contentView: ExampleBottomSheetView())
+    let controller = BottomSheetViewController()
     controller.sheetCornerRadius = 32
     controller.sheetSizingStyle = .toSafeAreaTop
     controller.handleStyle = .outside
@@ -51,7 +51,7 @@ public final class KlapzController: UIViewController {
   }
     
 @objc public func StartKlapz() {
-      let controller = BottomSheetViewController(contentView: ExampleBottomSheetView())
+      let controller = BottomSheetViewController()
       controller.sheetCornerRadius = 32
       controller.sheetSizingStyle = .toSafeAreaTop
       controller.handleStyle = .outside
