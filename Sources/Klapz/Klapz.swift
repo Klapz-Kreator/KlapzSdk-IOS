@@ -1,4 +1,4 @@
-public struct Klapz {
+public struct KlapzConfig {
     public var text = "Hello, World!"
     
     public init() {
