@@ -6,9 +6,10 @@
 //
 
 import UIKit
-import CountryPickerView
-import NKVPhonePicker
+import PhoneNumberKit
 import MultilineTextField
+import NKVPhonePicker
+import CountryPickerView
 public class ExampleBottomSheetView: UIView {
   
   // MARK: - UI Elements
@@ -202,7 +203,7 @@ public class ExampleBottomSheetView: UIView {
         var spacela2 = PaddingLabel()
         spacela2.text = ""
         spacela2.numberOfLines = 0
-        spacela2.padding(20, 0, 0, 0)
+        spacela2.padding(10, 0, 0, 0)
         
         
        
@@ -226,7 +227,7 @@ public class ExampleBottomSheetView: UIView {
         stacktest1.distribution = .fillProportionally
         stacktest1.translatesAutoresizingMaskIntoConstraints = false
         
-      let stack = UIStackView(arrangedSubviews: [Header , titlerclab,textFieldmulti,spacela,goldBorderedUIView,spacela1,stacktest1,buttonklapz,errobutton2,balanceKlapz,spacela2,errortextmain,errobutton])
+      let stack = UIStackView(arrangedSubviews: [Header , titlerclab,textFieldmulti,spacela,goldBorderedUIView,spacela1,balanceKlapz,stacktest1,buttonklapz,errobutton2,spacela2,errortextmain,errobutton])
       stack.axis = .vertical
       stack.spacing = 16
     //    stack.setCustomSpacing(24, after: descriptionLabel)
@@ -482,7 +483,7 @@ override init(frame: CGRect) {
    
     @objc func Preferklapz(_ sender : UIButton) {
         print(sender.tag)
-        buttonklapz.setTitle("Give this summary: " + String(sender.tag) + " Klapz", for: .normal)
+        buttonklapz.setTitle("Give " + String(sender.tag) + " Klapz", for: .normal)
         KlapzField.text = String(sender.tag)
     }
     
@@ -581,7 +582,7 @@ private func setupOtp() {
     
     ExampleBottomSheetView.styleSmallcount(
      balanceKlapz,
-      with: "Your balance: 5"
+      with: "Your Klapz balance: 5"
     )
     
     
