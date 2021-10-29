@@ -594,7 +594,7 @@ private func setupOtp() {
         with: "Micro rewarding free content on the internet."
     )
     
-    var myMutableString1 = NSMutableAttributedString(string: "Micro rewarding free content on the internet.\nLearn more", attributes: [NSAttributedString.Key.font :UIFont(name:"Montserrat-Regular", size: 15.0)!])
+    var myMutableString1 = NSMutableAttributedString(string: "Micro rewarding free content on the internet.\nLearn more", attributes: [NSAttributedString.Key.font :UIFont(name:"Montserrat-Regular", size: 15.0)])
     let paragraphStyle = NSMutableParagraphStyle()
 
     // *** set LineSpacing property in points ***
@@ -612,7 +612,7 @@ private func setupOtp() {
         with: "* Terms & Conditions"
     )
     
-    var myMutableString = NSMutableAttributedString(string: "* Terms & Conditions apply", attributes: [NSAttributedString.Key.font :UIFont(name:"Montserrat-Regular", size: 15.0)!])
+    var myMutableString = NSMutableAttributedString(string: "* Terms & Conditions apply", attributes: [NSAttributedString.Key.font :UIFont(name:"Montserrat-Regular", size: 15.0)])
     myMutableString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.white, range: NSRange(location:0,length:1))
     myMutableString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.white, range: NSRange(location:21,length:5))
     termandconditopn.attributedText = myMutableString
