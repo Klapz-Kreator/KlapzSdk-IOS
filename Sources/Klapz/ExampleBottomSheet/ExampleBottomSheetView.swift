@@ -598,24 +598,24 @@ private func setupOtp() {
     let paragraphStyle = NSMutableParagraphStyle()
 
     // *** set LineSpacing property in points ***
-    paragraphStyle.lineSpacing = 2
-    let string              = "Micro rewarding free content on the internet.\nLearn more"
-    let range               = (string as NSString).range(of: "Learn more")
-    myMutableString1.addAttribute(.paragraphStyle, value:paragraphStyle, range:NSMakeRange(0, myMutableString1.length))
-//    myMutableString1.addAttribute(NSAttributedString.Key.link, value: NSURL(string: "https://dev.klapz.club/")!, range: range)
-    myMutableString1.addAttribute(NSAttributedString.Key.underlineStyle, value: NSNumber(value: 1), range: range)
-    myMutableString1.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.white, range: NSRange(location:45,length:11))
-    maintitletext.attributedText = myMutableString1
+//    paragraphStyle.lineSpacing = 2
+//    let string              = "Micro rewarding free content on the internet.\nLearn more"
+//    let range               = (string as NSString).range(of: "Learn more")
+//    myMutableString1.addAttribute(.paragraphStyle, value:paragraphStyle, range:NSMakeRange(0, myMutableString1.length))
+////    myMutableString1.addAttribute(NSAttributedString.Key.link, value: NSURL(string: "https://dev.klapz.club/")!, range: range)
+//    myMutableString1.addAttribute(NSAttributedString.Key.underlineStyle, value: NSNumber(value: 1), range: range)
+//    myMutableString1.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.white, range: NSRange(location:45,length:11))
+//    maintitletext.attributedText = myMutableString1
     
     ExampleBottomSheetView.styleSmallStarttearm(
         termandconditopn,
         with: "* Terms & Conditions"
     )
     
-    var myMutableString = NSMutableAttributedString(string: "* Terms & Conditions apply", attributes: [NSAttributedString.Key.font :UIFont(name:"Montserrat-Regular", size: 15.0)])
-    myMutableString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.white, range: NSRange(location:0,length:1))
-    myMutableString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.white, range: NSRange(location:21,length:5))
-    termandconditopn.attributedText = myMutableString
+//    var myMutableString = NSMutableAttributedString(string: "* Terms & Conditions apply", attributes: [NSAttributedString.Key.font :UIFont(name:"Montserrat-Regular", size: 15.0)])
+//    myMutableString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.white, range: NSRange(location:0,length:1))
+//    myMutableString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.white, range: NSRange(location:21,length:5))
+//    termandconditopn.attributedText = myMutableString
     
     ExampleBottomSheetView.styleSmallStart(
       getnotify,
