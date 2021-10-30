@@ -414,6 +414,7 @@ override init(frame: CGRect) {
         var a: Int? = Int(KlapzField.text ?? "2")
         if(textField.text != ""){
             if(a! > 5){
+                
 //                ExampleBottomSheetView.styleSmalltexterror(
 //                  errortextmain,
 //                  with: "You have only 0 claps left. Can't contribute 2 claps"

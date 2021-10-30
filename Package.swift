@@ -28,7 +28,7 @@ let package = Package(
                 .product(name: "MultilineTextField", package: "MultilineTextField"),
                 .product(name: "NKVPhonePicker", package: "NKVPhonePicker")
             ],
-            resources: [.copy("images/wihteklapz.png"),.copy("images/klapzicon.png"),.copy("images/noti.png"),.copy("images/klap2.png"),.copy("fonts/Montserrat-Bold.ttf"),.copy("fonts/Montserrat-Medium.ttf"),.copy("fonts/Montserrat-Regular.ttf"),.process("fonts") ]
+            resources: [.copy("images/wihteklapz.png"),.copy("images/klapzicon.png"),.copy("images/noti.png"),.copy("images/klap2.png"),.copy("fonts/Montserrat-Bold.ttf"),.copy("fonts/Montserrat-Medium.ttf"),.copy("fonts/Montserrat-Regular.ttf"),.process("fonts/Montserrat-Bold.ttf") ]
             ),
     ]
 )
