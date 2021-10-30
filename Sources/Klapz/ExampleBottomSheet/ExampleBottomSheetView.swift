@@ -235,7 +235,7 @@ public class ExampleBottomSheetView: UIView {
 
     
     lazy var IntroStack: UIStackView = {
-        let catImage2 = UIImage(named: "noti.png")
+        let catImage2 = UIImage(named: "Images/noti.png")
         let containerViewtext = UIView(frame: CGRect(x:0,y:0,width:50,height:50))
         var loginrto = UIImageView()
         containerViewtext.addSubview(loginrto)
@@ -252,7 +252,7 @@ public class ExampleBottomSheetView: UIView {
         stacktest.translatesAutoresizingMaskIntoConstraints = false
         
         
-        let catImage3 = UIImage(named: "klap2.png")
+        let catImage3 = UIImage(named: "Images/klap2.png")
         let containerViewtext1 = UIView(frame: CGRect(x:0,y:0,width:50,height:50))
         var loginrto1 = UIImageView()
         containerViewtext1.addSubview(loginrto1)
@@ -349,13 +349,13 @@ override init(frame: CGRect) {
     KlapzField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
     
     
-    let catImage = UIImage(named: "klapzicon.png")
+    let catImage = UIImage(named: "Images/klapzicon.png")
     
     myImageView.contentMode = UIView.ContentMode.scaleAspectFit
     myImageView.image = catImage
     
     
-    let catImage2 = UIImage(named: "wihteklapz.png")
+    let catImage2 = UIImage(named: "Images/wihteklapz.png")
     logowhite.contentMode = UIView.ContentMode.scaleAspectFit
     logowhite.frame.size = CGSize(width: 54, height: 54)
     logowhite.image = catImage2
@@ -732,7 +732,7 @@ extension ExampleBottomSheetView {
   static func styleTitleLabel(_ label: UILabel, with text: String?) {
     label.text = text
     label.numberOfLines = 0
-    label.font = UIFont(name:"Montserrat-Bold", size: 20.0)
+    label.font = UIFont(name:"Fonts/Montserrat-Bold", size: 20.0)
     label.textAlignment = .center
     label.textColor =  UIColor(hexString: "#FFFFFF")
     label.setContentHuggingPriority(.defaultHigh, for: .vertical)
@@ -741,7 +741,7 @@ extension ExampleBottomSheetView {
     static func styleTitleLabelContent(_ label: UILabel, with text: String?) {
       label.text = text
       label.numberOfLines = 0
-      label.font = UIFont(name:"Montserrat-Regular", size: 20.0)
+      label.font = UIFont(name:"Fonts/Montserrat-Regular", size: 20.0)
       label.textAlignment = .center
       label.textColor =  UIColor(hexString: "#FFFFFF")
       label.setContentHuggingPriority(.defaultHigh, for: .vertical)
@@ -750,7 +750,7 @@ extension ExampleBottomSheetView {
       label.text = text
       label.numberOfLines = 0
       label.padding(150, 0, 0, 0)
-      label.font = UIFont(name:"Montserrat-Bold", size: 20.0)
+      label.font = UIFont(name:"Fonts/Montserrat-Bold", size: 20.0)
       label.textAlignment = .center
       label.textColor =  UIColor(hexString: "#FFFFFF")
       label.setContentHuggingPriority(.defaultHigh, for: .vertical)
@@ -760,7 +760,7 @@ extension ExampleBottomSheetView {
   static func styleDescriptionLabel(_ label: UILabel, with text: String?) {
     label.text = text
     label.numberOfLines = 0
-    label.font = UIFont(name:"Montserrat-Bold", size: 20.0)
+    label.font = UIFont(name:"Fonts/Montserrat-Bold", size: 20.0)
     label.textColor =  UIColor(hexString: "#FFFFFF")
     label.textAlignment = .center
   }
@@ -768,7 +768,7 @@ extension ExampleBottomSheetView {
     static func styleSmalltext(_ label: UILabel, with text: String?) {
       label.text = text
       label.numberOfLines = 0
-      label.font = UIFont(name:"Montserrat-Regular", size: 12.0)
+      label.font = UIFont(name:"Fonts/Montserrat-Regular", size: 12.0)
       label.textColor =  UIColor(hexString: "#FFFFFF")
       label.textAlignment = .center
     }
