@@ -23,7 +23,11 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
             name: "Klapz",
-            path: "Sources",
+            dependencies: [
+                .product(name: "CountryPickerView", package: "CountryPickerView"),
+                .product(name: "MultilineTextField", package: "MultilineTextField"),
+                .product(name: "NKVPhonePicker", package: "NKVPhonePicker")
+            ],
             resources: [.copy("images/wihteklapz.png"),.copy("images/klapzicon.png"),.copy("images/noti.png"),.copy("images/klap2.png"),.process("Resources") ]
             ),
     ]
