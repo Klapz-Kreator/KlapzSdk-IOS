@@ -769,11 +769,11 @@ private func setupOtp() {
         with: "Micro rewarding free content on the internet."
     )
     
-    var myMutableString1 = NSMutableAttributedString(string: "Micro rewarding free content on the internet.\nLearn more", attributes: [NSAttributedString.Key.font :UIFont(name:"Montserrat-Regular", size: 15.0)!])
+//    var myMutableString1 = NSMutableAttributedString(string: "Micro rewarding free content on the internet.\nLearn more", attributes: [NSAttributedString.Key.font :UIFont(name:"Montserrat-Regular", size: 15.0)!])
     let paragraphStyle = NSMutableParagraphStyle()
 
     // *** set LineSpacing property in points ***
-    paragraphStyle.lineSpacing = 2
+//    paragraphStyle.lineSpacing = 2
 //    let string              = "Micro rewarding free content on the internet.\nLearn more"
 //    let range               = (string as NSString).range(of: "Learn more")
 //    myMutableString1.addAttribute(.paragraphStyle, value:paragraphStyle, range:NSMakeRange(0, myMutableString1.length))
