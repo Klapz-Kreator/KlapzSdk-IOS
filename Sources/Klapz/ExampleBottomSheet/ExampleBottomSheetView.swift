@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import PhoneNumberKit
 import MultilineTextField
 import NKVPhonePicker
 import CountryPickerView
@@ -15,8 +16,8 @@ public class ExampleBottomSheetView: UIView {
   
   let titleLabel = UILabel()
 
-    let descibelable = UILabel()
-    let X = PaddingLabel()
+  let descibelable = UILabel()
+  let X = PaddingLabel()
   let goldBorderedUIView = UIView()
   let descriptionLabel = UILabel()
   let descriptionLabelOTP = UILabel()
@@ -25,6 +26,7 @@ public class ExampleBottomSheetView: UIView {
     let errobutton2 = UIButton(type: .system)
     let thnxtext = PaddingLabel()
     
+    let congrasulaiton = PaddingLabel()
     let spacePad = PaddingLabel()
     let frinds = PaddingLabel()
   let borderUI = CALayer()
@@ -37,8 +39,8 @@ public class ExampleBottomSheetView: UIView {
     
     let myImageView:UIImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 500.00, height: 30.00))
     let logowhite:UIImageView = UIImageView()
-
-    
+    let offerimage:UIImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 500.00, height: 30.00))
+    let offerbuytton = UIButton(type: .system)
     let buttonverify = UIButton(type: .system)
     var textFieldmulti = MultilineTextField(frame: CGRect(x: 0, y: 0, width: 500.00, height: 150.00))
     let titlerclab = UILabel()
@@ -54,6 +56,7 @@ public class ExampleBottomSheetView: UIView {
     let happytogo = UIButton(type: .system)
     let errortext = PaddingLabel()
     let errortextmain = PaddingLabel()
+    let KlapxUrl = "https://dev.klapz.club/"
 //    let UIViewController =
     let textField = TextFieldWithPadding(frame: CGRect(x: 0, y: 0, width: 500.00, height: 30.00));
     
@@ -98,13 +101,13 @@ public class ExampleBottomSheetView: UIView {
         bottomTextField.textColor = UIColor(hexString: "#FFFFFF")
         let paddingView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 0))//
         let stacktest = UIStackView(arrangedSubviews: [paddingView,bottomTextField])
-                stacktest.axis = .horizontal
-                stacktest.spacing = 16
-                stacktest.alignment = .fill
-                stacktest.distribution = .fillProportionally
-                stacktest.translatesAutoresizingMaskIntoConstraints = false
+        stacktest.axis = .horizontal
+        stacktest.spacing = 16
+        stacktest.alignment = .fill
+        stacktest.distribution = .fillProportionally
+        stacktest.translatesAutoresizingMaskIntoConstraints = false
         textField.leftView = stacktest
-    
+
         textField.leftViewMode = .always
         let stack = UIStackView(arrangedSubviews: [Header,descriptionLabel,descibelable,textField,errortext, button])
         stack.axis = .vertical
@@ -117,6 +120,30 @@ public class ExampleBottomSheetView: UIView {
     
     lazy var contentStackotp: UIStackView = {
       let stack = UIStackView(arrangedSubviews: [Header , descriptionLabelOTP,OTPField,errortextmain,resend,buttonverify,])
+      stack.axis = .vertical
+      stack.spacing = 16
+    //    stack.setCustomSpacing(24, after: descriptionLabel)
+      return stack
+    }()
+    
+    lazy var contentStackOffer: UIStackView = {
+        
+        let catImage3 = UIImage(named: "offerimage.png")
+        let containerViewtext1 = UIView(frame: CGRect(x:0,y:0,width:50,height:50))
+        var loginrto1 = UIImageView()
+        containerViewtext1.addSubview(loginrto1)
+        loginrto1.contentMode = UIView.ContentMode.scaleAspectFit
+        loginrto1.frame.size = CGSize(width: 30, height: 30)
+        loginrto1.frame.size.width = 30
+        loginrto1.frame.size.height = 30
+        loginrto1.image = catImage3
+        
+        var spacela1 = PaddingLabel()
+        spacela1.text = ""
+        spacela1.numberOfLines = 0
+        spacela1.padding(30, 0, 0, 0)
+        
+      let stack = UIStackView(arrangedSubviews: [Header , congrasulaiton  ,spacela1,spacela1, loginrto1,spacela1,spacela1, offerbuytton])
       stack.axis = .vertical
       stack.spacing = 16
     //    stack.setCustomSpacing(24, after: descriptionLabel)
@@ -235,7 +262,7 @@ public class ExampleBottomSheetView: UIView {
 
     
     lazy var IntroStack: UIStackView = {
-        let catImage2 = UIImage(named: "Images/noti.png")
+        let catImage2 = UIImage(named: "noti.png")
         let containerViewtext = UIView(frame: CGRect(x:0,y:0,width:50,height:50))
         var loginrto = UIImageView()
         containerViewtext.addSubview(loginrto)
@@ -252,7 +279,7 @@ public class ExampleBottomSheetView: UIView {
         stacktest.translatesAutoresizingMaskIntoConstraints = false
         
         
-        let catImage3 = UIImage(named: "Images/klap2.png")
+        let catImage3 = UIImage(named: "klap2.png")
         let containerViewtext1 = UIView(frame: CGRect(x:0,y:0,width:50,height:50))
         var loginrto1 = UIImageView()
         containerViewtext1.addSubview(loginrto1)
@@ -260,7 +287,6 @@ public class ExampleBottomSheetView: UIView {
         loginrto1.frame.size = CGSize(width: 30, height: 30)
         loginrto1.frame.size.width = 30
         loginrto1.frame.size.height = 30
-    
         loginrto1.image = catImage3
         let stacktest1 = UIStackView(arrangedSubviews: [loginrto1,giveklapxtext])
         stacktest1.axis = .horizontal
@@ -342,6 +368,7 @@ override init(frame: CGRect) {
     buttonverify.addTarget(self, action: #selector(buttonVerifyClicked), for: .touchUpInside)
     buttonklapz.addTarget(self, action: #selector(buttonVerifyKlapz), for: .touchUpInside)
     happytogo.addTarget(self, action: #selector(buttonhappy), for: .touchUpInside)
+    offerbuytton.addTarget(self, action: #selector(offerbuyttonclick), for: .touchUpInside)
     
     
     setup()
@@ -349,18 +376,17 @@ override init(frame: CGRect) {
     KlapzField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
     
     
-    let catImage = UIImage(named: "Images/klapzicon.png")
+    let catImage = UIImage(named: "klapzicon.png")
     
     myImageView.contentMode = UIView.ContentMode.scaleAspectFit
     myImageView.image = catImage
     
     
-    let catImage2 = UIImage(named: "Images/wihteklapz.png")
+    let catImage2 = UIImage(named: "wihteklapz.png")
     logowhite.contentMode = UIView.ContentMode.scaleAspectFit
     logowhite.frame.size = CGSize(width: 54, height: 54)
     logowhite.image = catImage2
     containerView.addSubview(logowhite)
-
     style()
     
     
@@ -414,7 +440,6 @@ override init(frame: CGRect) {
         var a: Int? = Int(KlapzField.text ?? "2")
         if(textField.text != ""){
             if(a! > 5){
-                
 //                ExampleBottomSheetView.styleSmalltexterror(
 //                  errortextmain,
 //                  with: "You have only 0 claps left. Can't contribute 2 claps"
@@ -432,7 +457,7 @@ override init(frame: CGRect) {
     
     @objc func buttonClicked() {
 //        setupOtp()
-        
+//        print(bottomTextField.selectedCountry.phoneCode)
         if(textField.text == "1234567890" || textField.text == "" || textField.text?.count != 10 ){
             ExampleBottomSheetView.styleSmalltexterror(
               errortext,
@@ -442,24 +467,153 @@ override init(frame: CGRect) {
             
 //            setupOtp()
 
+  
         }else{
-            errortext.isHidden = true // show
-            setupOtp()
+            Loginapi()
+
         }
         print(String(textField.text ?? "asd"))
     }
+    
+    func Loginapi() {
+        
+        let configuration = URLSessionConfiguration .default
+        let session = URLSession(configuration: configuration)
+        print(bottomTextField.selectedCountry)
+        let mobile = (bottomTextField.selectedCountry.phoneCode as String) + textField.text! ?? ""
+        let params = ["user":["mobile": mobile]] as Dictionary<String, AnyObject>
+        print(params)
+        let urlString = NSString(format: KlapxUrl + "auth/request_mobile_otp?apiKey=kuaduekwamk1ah&apiFrom=ios&buildNumber=3" as NSString);
+            print("url string is \(urlString)")
+            let request : NSMutableURLRequest = NSMutableURLRequest()
+            request.url = NSURL(string: NSString(format: "%@", urlString)as String) as URL?
+            request.httpMethod = "POST"
+            request.timeoutInterval = 30
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.addValue("application/json", forHTTPHeaderField: "Accept")
+            request.httpBody  = try! JSONSerialization.data(withJSONObject: params, options: [])
+
+     
+        let dataTask = session.dataTask(with: request as URLRequest)
+        { [self]
+                    (data: Data?, response: URLResponse?, error: Error?) -> Void in
+                    // 1: Check HTTP Response for successful GET request
+            guard let httpResponse = response as? HTTPURLResponse, let receivedData = data
+                    else {
+                            print("error: not a valid http response ========")
+                            return
+                    }
+
+                    switch (httpResponse.statusCode)
+                    {
+                    case 200:
+
+                        let response = NSString (data: receivedData, encoding: String.Encoding.utf8.rawValue)
+                        print("save profile POST request got response")
+                        DispatchQueue.main.async {
+                            self.errortext.isHidden = true // show
+                            self.setupOtp()
+                        }
+      
+                        print(response)
+
+                    default:
+                        DispatchQueue.main.async {
+                            ExampleBottomSheetView.styleSmalltexterror(
+                              self.errortext,
+                              with: "Please enter a valid mobile number"
+                            )
+                            self.errortext.isHidden = false
+                        }
+                        let response = NSString (data: receivedData, encoding: String.Encoding.utf8.rawValue)
+                        print("save profile POST request got error response \(response)")
+                    }
+            }
+            dataTask.resume()
+        
+    }
+    
+    
+    func OTPVefify(otp : String) {
+        
+        let configuration = URLSessionConfiguration .default
+        let session = URLSession(configuration: configuration)
+        print(bottomTextField.selectedCountry)
+        let mobile = (bottomTextField.selectedCountry.phoneCode as String) + textField.text! ?? ""
+        let params = ["user":["mobile": mobile,"otp":otp]] as Dictionary<String, AnyObject>
+        print(params)
+        let urlString = NSString(format: KlapxUrl + "auth/verify_mobile_otp.json?apiKey=kuaduekwamk1ah&apiFrom=ios&buildNumber=3" as NSString);
+            print("url string is \(urlString)")
+            let request : NSMutableURLRequest = NSMutableURLRequest()
+            request.url = NSURL(string: NSString(format: "%@", urlString)as String) as URL?
+            request.httpMethod = "POST"
+            request.timeoutInterval = 30
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.addValue("application/json", forHTTPHeaderField: "Accept")
+            request.httpBody  = try! JSONSerialization.data(withJSONObject: params, options: [])
+
+     
+        let dataTask = session.dataTask(with: request as URLRequest)
+        { [self]
+                    (data: Data?, response: URLResponse?, error: Error?) -> Void in
+                    // 1: Check HTTP Response for successful GET request
+            guard let httpResponse = response as? HTTPURLResponse, let receivedData = data
+                    else {
+                            print("error: not a valid http response ========")
+                            return
+                    }
+
+                    switch (httpResponse.statusCode)
+                    {
+                    case 200:
+
+                        let response = NSString (data: receivedData, encoding: String.Encoding.utf8.rawValue)
+                        print("save profile POST request got response")
+                        let json = try? JSONSerialization.jsonObject(with: receivedData) as! Dictionary<String, AnyObject>
+
+                        let name = json?["offer"];
+                        if(name != nil){
+                                DispatchQueue.main.async {
+                                    self.errortextmain.isHidden = true // show
+                                    self.setupOffer()
+                                }
+                        }else{
+                            DispatchQueue.main.async {
+                                    self.contentStackotp.removeFromSuperview()
+                                    self.setupKlapz()
+                            }
+                        }
+                        print(json?["user"] as? Dictionary<String, AnyObject>)
+
+                    default:
+                        DispatchQueue.main.async {
+                            ExampleBottomSheetView.styleSmalltexterror(
+                              errortextmain,
+                              with: "Please enter a valid code"
+                            )
+                            self.errortextmain.isHidden = false
+                        }
+                        
+                        let response = NSString (data: receivedData, encoding: String.Encoding.utf8.rawValue)
+                        print("save profile POST request got error response \(response)")
+                    }
+            }
+            dataTask.resume()
+        
+    }
+    
     @objc func buttonVerifyClicked() {
         if(OTPField.text?.count != 4 || OTPField.text == ""){
-        ExampleBottomSheetView.styleSmalltexterror(
-          errortextmain,
-          with: "Please enter a valid code"
-        )
+            ExampleBottomSheetView.styleSmalltexterror(
+              errortextmain,
+              with: "Please enter a valid code"
+            )
             errortextmain.isHidden = false // show
         }else{
-            errortextmain.isHidden = true // show
-            setupKlapz()
+            OTPVefify(otp: OTPField.text! ?? "1111")
+//            errortextmain.isHidden = true // show
+//            setupOffer()
         }
-  
         
         print(String(OTPField.text ?? "asd"))
     }
@@ -480,7 +634,11 @@ override init(frame: CGRect) {
     @objc func buttonhappy(){
         setupbuttonhappy()
     }
-   
+    @objc func offerbuyttonclick(){
+        setupKlapz()
+     }
+    
+    
     @objc func Preferklapz(_ sender : UIButton) {
         print(sender.tag)
         buttonklapz.setTitle("Give " + String(sender.tag) + " Klapz", for: .normal)
@@ -502,7 +660,20 @@ override init(frame: CGRect) {
   private func setup() {
     addSubview(IntroStack)
     setConstraintsintro()
+    
   }
+    
+    private func setupOffer() {
+        ExampleBottomSheetView.styleTitleLabel(
+          titleLabel,
+          with: "Klapz Club"
+        )
+      contentStackotp.removeFromSuperview()
+      addSubview(contentStackOffer)
+      setConstraintsOffer()
+      
+    }
+      
     
     private func setupbuttonhappy() {
         IntroStack.removeFromSuperview()
@@ -523,6 +694,7 @@ private func setupOtp() {
           with: "Klapz Club"
         )
       contentStackotp.removeFromSuperview()
+        contentStackOffer.removeFromSuperview()
       addSubview(contentStackKlapz)
       setConstraintsKLAPZ()
     }
@@ -584,7 +756,10 @@ private func setupOtp() {
      balanceKlapz,
       with: "Your Klapz balance: 5"
     )
-    
+    ExampleBottomSheetView.styleTitleCongo(
+      congrasulaiton,
+      with: "Congratulations"
+    )
     
     ExampleBottomSheetView.styleSmallStart(
         giveklapxtext,
@@ -595,11 +770,11 @@ private func setupOtp() {
         with: "Micro rewarding free content on the internet."
     )
     
-    var myMutableString1 = NSMutableAttributedString(string: "Micro rewarding free content on the internet.\nLearn more", attributes: [NSAttributedString.Key.font :UIFont(name:"Montserrat-Regular", size: 15.0)])
+    var myMutableString1 = NSMutableAttributedString(string: "Micro rewarding free content on the internet.\nLearn more", attributes: [NSAttributedString.Key.font :UIFont(name:"Montserrat-Regular", size: 15.0)!])
     let paragraphStyle = NSMutableParagraphStyle()
 
     // *** set LineSpacing property in points ***
-//    paragraphStyle.lineSpacing = 2
+    paragraphStyle.lineSpacing = 2
 //    let string              = "Micro rewarding free content on the internet.\nLearn more"
 //    let range               = (string as NSString).range(of: "Learn more")
 //    myMutableString1.addAttribute(.paragraphStyle, value:paragraphStyle, range:NSMakeRange(0, myMutableString1.length))
@@ -613,7 +788,7 @@ private func setupOtp() {
         with: "* Terms & Conditions"
     )
     
-//    var myMutableString = NSMutableAttributedString(string: "* Terms & Conditions apply", attributes: [NSAttributedString.Key.font :UIFont(name:"Montserrat-Regular", size: 15.0)])
+//    var myMutableString = NSMutableAttributedString(string: "* Terms & Conditions apply", attributes: [NSAttributedString.Key.font :UIFont(name:"Montserrat-Regular", size: 15.0)!])
 //    myMutableString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.white, range: NSRange(location:0,length:1))
 //    myMutableString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.white, range: NSRange(location:21,length:5))
 //    termandconditopn.attributedText = myMutableString
@@ -632,6 +807,8 @@ private func setupOtp() {
       with: "Please enter a valid Code"
     )
     
+    
+    
     ExampleBottomSheetView.styleButton(button)
     ExampleBottomSheetView.styleButtonMain(buttonverify)
     ExampleBottomSheetView.styleButtonKlapz(buttonklapz)
@@ -639,6 +816,7 @@ private func setupOtp() {
     ExampleBottomSheetView.styleButtonhappy(happytogo)
     ExampleBottomSheetView.styleButtonNuy(errobutton)
     ExampleBottomSheetView.styleButtonNuy(errobutton2)
+    ExampleBottomSheetView.styleButtonoffer(offerbuytton)
     errobutton2.isHidden = true
     errobutton.isHidden = true
     errortext.isHidden = true
@@ -673,6 +851,20 @@ private func setupOtp() {
   //    border.frame = CGRectMake(-1, -1, CGRectGetWidth(leftScrollView.frame), CGRectGetHeight(leftScrollView.frame)+2)
     }
   
+    
+    func setConstraintsOffer() {
+        contentStackOffer.translatesAutoresizingMaskIntoConstraints = false
+      
+      NSLayoutConstraint.activate([
+  //      contentStack.topAnchor.constraint(equalTo: topAnchor),
+        contentStackOffer.leadingAnchor.constraint(equalTo: leadingAnchor),
+        contentStackOffer.trailingAnchor.constraint(equalTo: trailingAnchor),
+  //      contentStack.bottomAnchor.constraint(equalTo: bottomAnchor)
+      ])
+    }
+  
+    
+    
     func setConstraintsOtp() {
         contentStackotp.translatesAutoresizingMaskIntoConstraints = false
       
@@ -732,7 +924,7 @@ extension ExampleBottomSheetView {
   static func styleTitleLabel(_ label: UILabel, with text: String?) {
     label.text = text
     label.numberOfLines = 0
-    label.font = UIFont(name:"Fonts/Montserrat-Bold", size: 20.0)
+    label.font = UIFont(name:"Montserrat-Bold", size: 20.0)
     label.textAlignment = .center
     label.textColor =  UIColor(hexString: "#FFFFFF")
     label.setContentHuggingPriority(.defaultHigh, for: .vertical)
@@ -741,7 +933,7 @@ extension ExampleBottomSheetView {
     static func styleTitleLabelContent(_ label: UILabel, with text: String?) {
       label.text = text
       label.numberOfLines = 0
-      label.font = UIFont(name:"Fonts/Montserrat-Regular", size: 20.0)
+      label.font = UIFont(name:"Montserrat-Regular", size: 20.0)
       label.textAlignment = .center
       label.textColor =  UIColor(hexString: "#FFFFFF")
       label.setContentHuggingPriority(.defaultHigh, for: .vertical)
@@ -750,7 +942,18 @@ extension ExampleBottomSheetView {
       label.text = text
       label.numberOfLines = 0
       label.padding(150, 0, 0, 0)
-      label.font = UIFont(name:"Fonts/Montserrat-Bold", size: 20.0)
+      label.font = UIFont(name:"Montserrat-Bold", size: 20.0)
+      label.textAlignment = .center
+      label.textColor =  UIColor(hexString: "#FFFFFF")
+      label.setContentHuggingPriority(.defaultHigh, for: .vertical)
+    }
+    
+    
+    static func styleTitleCongo(_ label: PaddingLabel, with text: String?) {
+      label.text = text
+      label.numberOfLines = 0
+      label.padding(30, 0, 0, 0)
+      label.font = UIFont(name:"Montserrat-Bold", size: 20.0)
       label.textAlignment = .center
       label.textColor =  UIColor(hexString: "#FFFFFF")
       label.setContentHuggingPriority(.defaultHigh, for: .vertical)
@@ -760,7 +963,7 @@ extension ExampleBottomSheetView {
   static func styleDescriptionLabel(_ label: UILabel, with text: String?) {
     label.text = text
     label.numberOfLines = 0
-    label.font = UIFont(name:"Fonts/Montserrat-Bold", size: 20.0)
+    label.font = UIFont(name:"Montserrat-Bold", size: 20.0)
     label.textColor =  UIColor(hexString: "#FFFFFF")
     label.textAlignment = .center
   }
@@ -768,7 +971,7 @@ extension ExampleBottomSheetView {
     static func styleSmalltext(_ label: UILabel, with text: String?) {
       label.text = text
       label.numberOfLines = 0
-      label.font = UIFont(name:"Fonts/Montserrat-Regular", size: 12.0)
+      label.font = UIFont(name:"Montserrat-Regular", size: 12.0)
       label.textColor =  UIColor(hexString: "#FFFFFF")
       label.textAlignment = .center
     }
@@ -895,6 +1098,18 @@ extension ExampleBottomSheetView {
       button.contentEdgeInsets = UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
       button.layer.cornerRadius = 8
     }
+    
+    
+    static func styleButtonoffer(_ button: UIButton) {
+      button.backgroundColor = .white
+      button.setTitle("Continue", for: .normal)
+      button.titleLabel?.font =  UIFont(name:"Montserrat-Bold", size: 18.0)
+      button.setTitleColor(  UIColor(hexString: "#ff7f57"), for: .normal)
+      button.contentEdgeInsets = UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
+      button.layer.cornerRadius = 8
+    }
+    
+    
     
     static func styleButtonNuy(_ button: UIButton) {
       button.backgroundColor = .white

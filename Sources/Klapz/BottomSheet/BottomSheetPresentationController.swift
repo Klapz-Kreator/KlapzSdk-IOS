@@ -152,7 +152,7 @@ public final class BottomSheetPresentationController: UIPresentationController {
     presentedView.frame = frameOfPresentedViewInContainerView
     
     let gap = presenterView.bounds.height - frameOfPresentedViewInContainerView.height
-    presentedView.center = CGPoint(x: presenterView.center.x, y: presenterView.center.y + gap / 2)
+    presentedView.center = CGPoint(x: presenterView.center.x, y: presenterView.center.y + gap)
     presentedViewCenter = presentedView.center
     
     dimmingView.frame = presenterView.bounds
