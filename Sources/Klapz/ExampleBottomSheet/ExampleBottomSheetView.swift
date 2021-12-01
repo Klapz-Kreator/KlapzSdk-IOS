@@ -25,7 +25,8 @@ public class ExampleBottomSheetView: UIView {
   let errobutton = UIButton(type: .system)
     let errobutton2 = UIButton(type: .system)
     let thnxtext = PaddingLabel()
-    
+    var KlapzCount = ""
+     var KlapzBalance = 1000
     let congrasulaiton = PaddingLabel()
     let spacePad = PaddingLabel()
     let frinds = PaddingLabel()
@@ -65,6 +66,14 @@ public class ExampleBottomSheetView: UIView {
         "key":"xxx",
         "PreferKlapz":"10,20,30",
     ]
+    
+    var KlapzresMain: (_ Klapxres : [String: Any]) -> Bool = { _ in return false  }
+    
+   
+    
+    public func SetLissner(KlapzRes: @escaping ([String: Any]) -> Bool){
+        KlapzresMain = KlapzRes
+    }
     
     public func StartKlapz(Config:[String:Any]) {
         self.KlapzConfig = Config
@@ -459,8 +468,11 @@ public override init(frame: CGRect) {
     
     @objc func textFieldDidChange(_ textField: UITextField) {
         var a: Int? = Int(KlapzField.text ?? "2")
+        KlapzCount = textField.text ?? "2"
+        buttonklapz.setTitle("Give " + KlapzCount + " Klapz", for: .normal)
+        
         if(textField.text != ""){
-            if(a! > 5){
+            if(a! > KlapzBalance){
 //                ExampleBottomSheetView.styleSmalltexterror(
 //                  errortextmain,
 //                  with: "You have only 0 claps left. Can't contribute 2 claps"
@@ -608,6 +620,7 @@ public override init(frame: CGRect) {
                         var user = json?["user"] as? Dictionary<String, AnyObject>
                         print(user?["balanceClaps"] as! Int)
                         var couts = user?["balanceClaps"] as! Int
+                        KlapzBalance = couts
                         DispatchQueue.main.async {
                             ExampleBottomSheetView.styleSmallcount(
                              balanceKlapz,
@@ -641,7 +654,7 @@ public override init(frame: CGRect) {
         var params = ["claps":"claps"] as Dictionary<String, AnyObject>
         if(KlapzConfig["Url"] != nil){
             params = ["claps":[
-                "count":2,
+                "count":KlapzCount,
                 "title":  KlapzConfig["title"] as! String,
                 "public": true,
                 "Key": "kuaduekwamk1ah",
@@ -706,6 +719,7 @@ public override init(frame: CGRect) {
                         let name = json?["offer"];
                         DispatchQueue.main.async {
                                 self.setupKlapzContent()
+                               KlapzresMain(params)
                         }
                         print(json?["user"] as? Dictionary<String, AnyObject>)
 

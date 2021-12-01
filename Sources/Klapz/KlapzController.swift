@@ -64,7 +64,7 @@ public final class KlapzController: UIViewController {
   }
   
   @objc private func didPressButton(_ sender: UIButton) {
-    let controller = BottomSheetViewController(KlapConfig: jsonObject)
+    let controller = BottomSheetViewController(KlapConfig: jsonObject,KlapzRes: KlapxzResponce)
     controller.sheetCornerRadius = 32
     controller.sheetSizingStyle = .toSafeAreaTop
     controller.handleStyle = .outside
@@ -73,12 +73,19 @@ public final class KlapzController: UIViewController {
   }
     
 @objc public func StartKlapz() {
-      let controller = BottomSheetViewController(KlapConfig: jsonObject)
+      let controller = BottomSheetViewController(KlapConfig: jsonObject,KlapzRes: KlapxzResponce)
       controller.sheetCornerRadius = 32
       controller.sheetSizingStyle = .toSafeAreaTop
       controller.handleStyle = .outside
       controller.contentInsets = UIEdgeInsets(top: 24, left: 24, bottom: 24, right: 24)
       present(controller, animated: true, completion: nil)
+    }
+    
+    func KlapxzResponce(KlapzRes : [String: Any]) -> Bool {
+        
+        print(KlapzRes)
+        
+        return true;
     }
   
   @objc public func didSelectSegmentedItem(_ sender: UISegmentedControl) {
