@@ -82,7 +82,7 @@ public final class KlapzController: UIViewController {
     }
     
     func KlapxzResponce(KlapzRes : [String: Any]) -> Bool {
-        
+        print("=====resopnce=========")
         print(KlapzRes)
         
         return true;
