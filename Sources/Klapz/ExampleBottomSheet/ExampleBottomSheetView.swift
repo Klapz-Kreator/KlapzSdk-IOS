@@ -261,7 +261,8 @@ public class ExampleBottomSheetView: UIView {
 
     
     lazy var IntroStack: UIStackView = {
-        let catImage2 = UIImage(named: "noti.png")
+        let catImage2 = UIImage(named: "noti.png",in: Bundle(for: type(of:self)),
+                                compatibleWith: nil)
         let containerViewtext = UIView(frame: CGRect(x:0,y:0,width:50,height:50))
         var loginrto = UIImageView()
         containerViewtext.addSubview(loginrto)

@@ -28,8 +28,8 @@ let package = Package(
                 .product(name: "MultilineTextField", package: "MultilineTextField"),
                 .product(name: "NKVPhonePicker", package: "NKVPhonePicker")
             ],
-            path: "."
-            ),
+            resources: [.copy("images/wihteklapz.png"),.copy("images/klapzicon.png"),.copy("images/noti.png"),.copy("images/klap2.png"),.process("images/klapzicon.png") ,.process("images/noti.png"),.process("Resources") ]
+            )
           
     ]
 )
