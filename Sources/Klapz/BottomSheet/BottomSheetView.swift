@@ -15,7 +15,7 @@ public final class BottomSheetView: UIView {
   /// The sizing style of the sheet.
   public var sheetSizingStyle: SheetSizingStyle
     
-    public var KlapConfig: [String: Any]
+  public var KlapzConfig: [String: Any]
   /// The corner radius of the bottom sheet.
   public var cornerRadius: CGFloat = 32 {
     willSet {
@@ -104,9 +104,7 @@ public final class BottomSheetView: UIView {
     didSet {
       oldValue.removeFromSuperview()
       addSubview(contentView)
-      
       style()
-      
       setHandle(for: handleStyle)
       setContentViewConstraints()
       updateHandleConstraints(for: handleStyle)
@@ -120,19 +118,10 @@ public final class BottomSheetView: UIView {
   /// - Parameters:
   ///   - sheetSizingStyle: The sizing style of the bottom sheet. Defaults to `toSafeAreaTop`.
   ///   - handleStyle: The handle style of the bottom sheet. Defaults to `none`.
-  public init(sheetSizingStyle: SheetSizingStyle = .toSafeAreaTop, handleStyle: HandleStyle = .none) {
+    public init(sheetSizingStyle: SheetSizingStyle = .toSafeAreaTop, handleStyle: HandleStyle = .none,KlapzConfig: [String: Any] = ["jey":""]) {
     self.sheetSizingStyle = .toSafeAreaTop
     self.handleStyle = .outside
-    let jsonObject: [String: Any] = [
-        "key": "xxxx",
-        "Envirment":"SendBox",
-        "title":"Content Titlew",
-        "klapz":2,
-        "createrID":"createrID",
-        "Url":"",
-        "Mode":"Default"
-    ]
-    self.KlapConfig = jsonObject
+    self.KlapzConfig = KlapzConfig
     super.init(frame: .zero)
     
     setup()
@@ -141,16 +130,7 @@ public final class BottomSheetView: UIView {
   
   public required init?(coder: NSCoder) {
     self.sheetSizingStyle = .toSafeAreaTop
-    let jsonObject: [String: Any] = [
-        "key": "xxxx",
-        "Envirment":"SendBox",
-        "title":"Content Titlew",
-        "klapz":2,
-        "createrID":"createrID",
-        "Url":"",
-        "Mode":"Default"
-    ]
-    self.KlapConfig = jsonObject
+    self.KlapzConfig = ["jey":""]
     super.init(coder: coder)
     
     setup()
@@ -300,3 +280,4 @@ private extension BottomSheetView {
 }
 
 #endif
+

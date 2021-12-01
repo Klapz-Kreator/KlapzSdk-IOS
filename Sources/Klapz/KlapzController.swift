@@ -12,6 +12,28 @@ public final class KlapzController: UIViewController {
   
   private let viewModel = ViewModel()
   private let mainView = View()
+    let jsonObject: [String: Any] = [
+        "key": "kuaduekwamk1ah",
+        "Envirment":"SandBox",
+        "klapz":2,
+        "PreferKlapz":"10,20,30",
+        "expressionPlaceholder":"Tell us, what do you love about this book summary",
+        "appId":"1001",
+        "ThankText":"Thanks for Klapping.",
+        "Mode":"Default",
+        
+        "Url":"",
+        //OR
+        "title":"Content Title",
+        "tags":"",
+        "ContentType":"booklet", // as it is
+        "contentId":"contentId", // Chapter Id
+        "creatorId":"1", // Value is always "1"
+        "creatorName":"creatorName", // Amruth Deshmukh
+        "creatorScreenName":"creatorScreenName", // Amruth Deshmukh
+
+    ]
+    
 //  public var KlapbConfig: [String: Any]
 //  public var KlapbConfignew: [String: Any]
    public init (){
@@ -42,7 +64,7 @@ public final class KlapzController: UIViewController {
   }
   
   @objc private func didPressButton(_ sender: UIButton) {
-    let controller = BottomSheetViewController()
+    let controller = BottomSheetViewController(KlapConfig: jsonObject)
     controller.sheetCornerRadius = 32
     controller.sheetSizingStyle = .toSafeAreaTop
     controller.handleStyle = .outside
@@ -51,7 +73,7 @@ public final class KlapzController: UIViewController {
   }
     
 @objc public func StartKlapz() {
-      let controller = BottomSheetViewController()
+      let controller = BottomSheetViewController(KlapConfig: jsonObject)
       controller.sheetCornerRadius = 32
       controller.sheetSizingStyle = .toSafeAreaTop
       controller.handleStyle = .outside

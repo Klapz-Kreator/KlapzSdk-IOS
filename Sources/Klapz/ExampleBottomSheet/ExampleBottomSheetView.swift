@@ -56,6 +56,7 @@ public class ExampleBottomSheetView: UIView {
     let happytogo = UIButton(type: .system)
     let errortext = PaddingLabel()
     let errortextmain = PaddingLabel()
+    var token = ""
     let KlapxUrl = "https://dev.klapz.club/"
 //    let UIViewController =
     let textField = TextFieldWithPadding(frame: CGRect(x: 0, y: 0, width: 500.00, height: 30.00));
@@ -196,13 +197,13 @@ public class ExampleBottomSheetView: UIView {
         var loginrto = UIImageView()
         containerViewtext.addSubview(loginrto)
         loginrto.contentMode = UIView.ContentMode.scaleAspectFit
-        loginrto.frame.size = CGSize(width: 25, height: 25)
-        loginrto.frame.size.width = 25
-        loginrto.frame.size.height = 25
+        loginrto.frame.size = CGSize(width: 50, height: 50)
+        loginrto.frame.size.width = 50
+        loginrto.frame.size.height = 50
         loginrto.image = catImage2
         containerViewtext.addSubview(loginrto)
-        containerViewtext.addConstraint(containerViewtext.heightAnchor.constraint(equalToConstant: 25))
-        containerViewtext.addConstraint(containerViewtext.widthAnchor.constraint(equalToConstant: 25))
+        containerViewtext.addConstraint(containerViewtext.heightAnchor.constraint(equalToConstant: 50))
+        containerViewtext.addConstraint(containerViewtext.widthAnchor.constraint(equalToConstant: 50))
         
         let stackmain = UIStackView(arrangedSubviews: [[containerViewtext,X],arrayOfButtons,[KlapzField]].reduce([], +))
         stackmain.spacing   = 12
@@ -586,7 +587,7 @@ public override init(frame: CGRect) {
                     switch (httpResponse.statusCode)
                     {
                     case 200:
-
+                        token = httpResponse.allHeaderFields["auth-token"] as! String
                         let response = NSString (data: receivedData, encoding: String.Encoding.utf8.rawValue)
                         print("save profile POST request got response")
                         let json = try? JSONSerialization.jsonObject(with: receivedData) as! Dictionary<String, AnyObject>
@@ -604,6 +605,15 @@ public override init(frame: CGRect) {
                             }
                         }
                         print(json?["user"] as? Dictionary<String, AnyObject>)
+                        var user = json?["user"] as? Dictionary<String, AnyObject>
+                        print(user?["balanceClaps"] as! Int)
+                        var couts = user?["balanceClaps"] as! Int
+                        DispatchQueue.main.async {
+                            ExampleBottomSheetView.styleSmallcount(
+                             balanceKlapz,
+                                with: "Your Klapz balance: " +  String(couts)
+                            )
+                        }
 
                     default:
                         DispatchQueue.main.async {
@@ -621,6 +631,93 @@ public override init(frame: CGRect) {
             dataTask.resume()
         
     }
+    
+    
+    func Klapz() {
+        
+        let configuration = URLSessionConfiguration .default
+        let session = URLSession(configuration: configuration)
+        
+        var params = ["claps":"claps"] as Dictionary<String, AnyObject>
+        if(KlapzConfig["Url"] != nil){
+            params = ["claps":[
+                "count":2,
+                "title":  KlapzConfig["title"] as! String,
+                "public": true,
+                "Key": "kuaduekwamk1ah",
+                "fromWhere": "externalApp",
+                "expression": Klapxexpretion.text,
+                "contentURL":  KlapzConfig["Url"] as! String,
+                
+                ]] as Dictionary<String, AnyObject>
+        }else{
+            params = ["claps":[
+                "count":2,
+                "title":  KlapzConfig["title"] as! String,
+                "public": true,
+                "Key": "kuaduekwamk1ah",
+                "fromWhere": "externalApp",
+                "expression": Klapxexpretion.text,
+                
+                "description":  KlapzConfig["description"] as! String,
+                "contentId":  KlapzConfig["contentId"] as! String,
+                "creatorId":  KlapzConfig["creatorId"] as! String,
+                "creatorName":  KlapzConfig["creatorName"] as! String,
+                "creatorScreenName":  KlapzConfig["creatorScreenName"] as! String,
+                "tags":  KlapzConfig["tags"] as! String,
+                "ContentType":  KlapzConfig["ContentType"] as! String,
+                
+                ]] as Dictionary<String, AnyObject>
+        }
+   
+        print(params)
+        let urlString = NSString(format: KlapxUrl + "claps/expend?apiKey=kuaduekwamk1ah&apiFrom=ios&buildNumber=3" as NSString);
+            print("url string is \(urlString)")
+            print(token)
+            let request : NSMutableURLRequest = NSMutableURLRequest()
+            request.url = NSURL(string: NSString(format: "%@", urlString)as String) as URL?
+            request.httpMethod = "POST"
+            request.timeoutInterval = 30
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.addValue("application/json", forHTTPHeaderField: "Accept")
+             request.addValue("auth-token", forHTTPHeaderField: token)
+            request.httpBody  = try! JSONSerialization.data(withJSONObject: params, options: [])
+
+     
+        let dataTask = session.dataTask(with: request as URLRequest)
+        { [self]
+                    (data: Data?, response: URLResponse?, error: Error?) -> Void in
+                    // 1: Check HTTP Response for successful GET request
+            guard let httpResponse = response as? HTTPURLResponse, let receivedData = data
+                    else {
+                            print("error: not a valid http response ========")
+                            print(response)
+                            return
+                    }
+
+                    switch (httpResponse.statusCode)
+                    {
+                    case 200:
+
+                        let response = NSString (data: receivedData, encoding: String.Encoding.utf8.rawValue)
+                        print("save profile POST request got response")
+                        let json = try? JSONSerialization.jsonObject(with: receivedData) as! Dictionary<String, AnyObject>
+
+                        let name = json?["offer"];
+                        DispatchQueue.main.async {
+                                self.setupKlapzContent()
+                        }
+                        print(json?["user"] as? Dictionary<String, AnyObject>)
+
+                    default:
+                        let response = NSString (data: receivedData, encoding: String.Encoding.utf8.rawValue)
+                        print("save profile POST request got error response \(response)")
+                    }
+            }
+            dataTask.resume()
+        
+    }
+    
     
     @objc func buttonVerifyClicked() {
         if(OTPField.text?.count != 4 || OTPField.text == ""){
@@ -646,8 +743,8 @@ public override init(frame: CGRect) {
 //        )
 //        errortextmain.isHidden = false
 //        errobutton.isHidden = false
-        
-            setupKlapzContent()
+        Klapz()
+//        setupKlapzContent()
         print("Call api")
     }
     
@@ -713,6 +810,10 @@ private func setupOtp() {
           titleLabel,
           with: "Klapz Club"
         )
+            ExampleBottomSheetView.styleTitleLabelContent(
+                titlerclab,
+                with: KlapzConfig["title"] as! String
+          )
       contentStackotp.removeFromSuperview()
         contentStackOffer.removeFromSuperview()
       addSubview(contentStackKlapz)

@@ -48,19 +48,21 @@ public final class BottomSheetViewController: UIViewController {
   }
   
     public var KlapConfig: [String: Any] {
-      get { bottomSheetView.KlapConfig }
-      set { bottomSheetView.KlapConfig = newValue }
+      get { bottomSheetView.KlapzConfig }
+      set { bottomSheetView.KlapzConfig = newValue }
     }
     
   // MARK: - Init
   
   /// Creates a `BottomSheetViewController` with the specified content view.
   /// - Parameter contentView: The content view to place into the bottom sheet.
-  public convenience init() {
+    public convenience init(KlapConfig: [String: Any]) {
     self.init(nibName: nil, bundle: nil)
     
     if #available(iOS 13.0, *) {
-        self.contentView = ExampleBottomSheetView()
+        let ExampleBottomSheet = ExampleBottomSheetView()
+        ExampleBottomSheet.StartKlapz(Config: KlapConfig)
+        self.contentView = ExampleBottomSheet
         sheetCornerRadius = 32
         sheetSizingStyle = .toSafeAreaTop
         handleStyle = .outside
@@ -71,6 +73,7 @@ public final class BottomSheetViewController: UIViewController {
     
     setup()
   }
+  
   
   public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
     super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
