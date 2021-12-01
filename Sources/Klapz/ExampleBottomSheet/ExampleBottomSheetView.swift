@@ -128,7 +128,7 @@ public class ExampleBottomSheetView: UIView {
     
     lazy var contentStackOffer: UIStackView = {
         
-        let catImage3 = UIImage(named: "offerimage.png", in: Bundle.module, compatibleWith: nil)
+        let catImage3 = UIImage(named: "offerrs.png", in: Bundle.module, compatibleWith: nil)
         let containerViewtext1 = UIView(frame: CGRect(x:0,y:0,width:50,height:50))
         var loginrto1 = UIImageView()
         containerViewtext1.addSubview(loginrto1)
@@ -272,7 +272,9 @@ public class ExampleBottomSheetView: UIView {
         loginrto.frame.size.width = 25
         loginrto.frame.size.height = 25
         loginrto.image = catImage2
-        let stacktest = UIStackView(arrangedSubviews: [loginrto,getnotify])
+        containerViewtext.addSubview(loginrto)
+        
+        let stacktest = UIStackView(arrangedSubviews: [containerViewtext,getnotify])
         stacktest.axis = .horizontal
         stacktest.spacing = 16
         stacktest.alignment = .fill
@@ -289,7 +291,7 @@ public class ExampleBottomSheetView: UIView {
         loginrto1.frame.size.width = 30
         loginrto1.frame.size.height = 30
         loginrto1.image = catImage3
-        let stacktest1 = UIStackView(arrangedSubviews: [loginrto1,giveklapxtext])
+        let stacktest1 = UIStackView(arrangedSubviews: [containerViewtext1,giveklapxtext])
         stacktest1.axis = .horizontal
         stacktest1.spacing = 16
         stacktest1.alignment = .fill
@@ -391,8 +393,6 @@ public override init(frame: CGRect) {
     logowhite.image = catImage2
     containerView.addSubview(logowhite)
     style()
-    
-    
    
     textFieldmulti.placeholder = "  Tell us, what do you love about this book summary"
     textFieldmulti.placeholderColor =  UIColor(hexString: "#ffffff")
