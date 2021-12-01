@@ -37,7 +37,7 @@ public class ExampleBottomSheetView: UIView {
   let button = UIButton(type: .system)
     let containerView = UIView(frame: CGRect(x:0,y:0,width:120,height:120))
     
-    let myImageView:UIImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 54, height: 54.00))
+    let myImageView:UIImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 500.00, height: 30.00))
     let logowhite:UIImageView = UIImageView()
     let offerimage:UIImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 500.00, height: 30.00))
     let offerbuytton = UIButton(type: .system)
@@ -191,7 +191,20 @@ public class ExampleBottomSheetView: UIView {
         containerViewiomage.heightAnchor.constraint(equalToConstant: 50).isActive = true
         containerViewiomage.widthAnchor.constraint(equalToConstant: 40).isActive = true
         
-        let stackmain = UIStackView(arrangedSubviews: [[containerViewiomage,X],arrayOfButtons,[KlapzField]].reduce([], +))
+        let catImage2 = UIImage(named: "klapzicon.png", in: Bundle.module, compatibleWith: nil)
+        let containerViewtext = UIView(frame: CGRect(x:0,y:0,width:50,height:50))
+        var loginrto = UIImageView()
+        containerViewtext.addSubview(loginrto)
+        loginrto.contentMode = UIView.ContentMode.scaleAspectFit
+        loginrto.frame.size = CGSize(width: 25, height: 25)
+        loginrto.frame.size.width = 25
+        loginrto.frame.size.height = 25
+        loginrto.image = catImage2
+        containerViewtext.addSubview(loginrto)
+        containerViewtext.addConstraint(containerViewtext.heightAnchor.constraint(equalToConstant: 25))
+        containerViewtext.addConstraint(containerViewtext.widthAnchor.constraint(equalToConstant: 25))
+        
+        let stackmain = UIStackView(arrangedSubviews: [[containerViewtext,X],arrayOfButtons,[KlapzField]].reduce([], +))
         stackmain.spacing   = 12
         stackmain.axis = .horizontal
         stackmain.translatesAutoresizingMaskIntoConstraints = false
@@ -386,7 +399,7 @@ public override init(frame: CGRect) {
     
     
     let catImage = UIImage(named: "klapzicon.png",in: Bundle.module, compatibleWith: nil)
-    myImageView.frame.size = CGSize(width: 54, height: 54)
+    
     myImageView.contentMode = UIView.ContentMode.scaleAspectFit
     myImageView.image = catImage
     
@@ -396,8 +409,6 @@ public override init(frame: CGRect) {
     logowhite.frame.size = CGSize(width: 54, height: 54)
     logowhite.image = catImage2
     containerView.addSubview(logowhite)
-    containerView.addConstraint(containerView.heightAnchor.constraint(equalToConstant: 54))
-    containerView.addConstraint(containerView.widthAnchor.constraint(equalToConstant: 54))
     style()
    
     textFieldmulti.placeholder = "  Tell us, what do you love about this book summary"
