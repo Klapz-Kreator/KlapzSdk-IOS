@@ -273,6 +273,8 @@ public class ExampleBottomSheetView: UIView {
         loginrto.frame.size.height = 25
         loginrto.image = catImage2
         containerViewtext.addSubview(loginrto)
+        containerViewtext.addConstraint(containerViewtext.heightAnchor.constraint(equalToConstant: 50))
+        containerViewtext.addConstraint(containerViewtext.widthAnchor.constraint(equalToConstant: 50))
         
         let stacktest = UIStackView(arrangedSubviews: [containerViewtext,getnotify])
         stacktest.axis = .horizontal
@@ -286,6 +288,8 @@ public class ExampleBottomSheetView: UIView {
         let containerViewtext1 = UIView(frame: CGRect(x:0,y:0,width:50,height:50))
         var loginrto1 = UIImageView()
         containerViewtext1.addSubview(loginrto1)
+        containerViewtext1.addConstraint(containerViewtext1.heightAnchor.constraint(equalToConstant: 50))
+        containerViewtext1.addConstraint(containerViewtext1.widthAnchor.constraint(equalToConstant: 50))
         loginrto1.contentMode = UIView.ContentMode.scaleAspectFit
         loginrto1.frame.size = CGSize(width: 30, height: 30)
         loginrto1.frame.size.width = 30
