@@ -18,6 +18,7 @@ let package = Package(
          .package(url: "https://github.com/kizitonwose/CountryPickerView", from: "3.3.0"),
          .package(url: "https://github.com/rlaguilar/MultilineTextField",from: "1.0.0"),
          .package(url: "https://github.com/NikKovIos/NKVPhonePicker", from: "2.1.1"),
+         .package(url: "https://github.com/ArtSabintsev/FontBlaster", from: "5.2.0")
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
@@ -27,7 +28,8 @@ let package = Package(
             dependencies: [
                 .product(name: "CountryPickerView", package: "CountryPickerView"),
                 .product(name: "MultilineTextField", package: "MultilineTextField"),
-                .product(name: "NKVPhonePicker", package: "NKVPhonePicker")
+                .product(name: "NKVPhonePicker", package: "NKVPhonePicker"),
+                .product(name: "FontBlaster", package: "FontBlaster")
             ],
             resources: [.process("Resources") ]
         )

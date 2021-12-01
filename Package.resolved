@@ -11,6 +11,15 @@
         }
       },
       {
+        "package": "FontBlaster",
+        "repositoryURL": "https://github.com/ArtSabintsev/FontBlaster",
+        "state": {
+          "branch": null,
+          "revision": "a7c05d963f1a90ed558c3f8c7a663c097498a27d",
+          "version": "5.2.0"
+        }
+      },
+      {
         "package": "MultilineTextField",
         "repositoryURL": "https://github.com/rlaguilar/MultilineTextField",
         "state": {

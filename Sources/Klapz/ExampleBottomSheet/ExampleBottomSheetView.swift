@@ -9,6 +9,7 @@ import UIKit
 import MultilineTextField
 import NKVPhonePicker
 import CountryPickerView
+import FontBlaster
 public class ExampleBottomSheetView: UIView {
   
   // MARK: - UI Elements
@@ -307,6 +308,8 @@ public class ExampleBottomSheetView: UIView {
   
 public override init(frame: CGRect) {
     super.init(frame: frame)
+    
+    FontBlaster.blast(bundle: .module)
     
     self.textField.placeholder = "Enter phone number"
 //    self.textField.withFlag = true
