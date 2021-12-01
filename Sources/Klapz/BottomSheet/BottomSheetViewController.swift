@@ -63,6 +63,7 @@ public final class BottomSheetViewController: UIViewController {
         let ExampleBottomSheet = ExampleBottomSheetView()
         ExampleBottomSheet.StartKlapz(Config: KlapConfig)
         ExampleBottomSheet.KlapzresMain = KlapzRes
+        self.contentView = ExampleBottomSheet
         sheetCornerRadius = 32
         sheetSizingStyle = .toSafeAreaTop
         handleStyle = .outside
