@@ -5,6 +5,7 @@ import PackageDescription
 
 let package = Package(
     name: "Klapz",
+    defaultLocalization: "en",
     platforms: [.iOS(.v13)],
     products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.
@@ -28,8 +29,8 @@ let package = Package(
                 .product(name: "MultilineTextField", package: "MultilineTextField"),
                 .product(name: "NKVPhonePicker", package: "NKVPhonePicker")
             ],
-            resources: [.copy("images/wihteklapz.png"),.copy("images/klapzicon.png"),.copy("images/noti.png"),.copy("images/klap2.png"),.process("images/klapzicon.png") ,.process("images/noti.png"),.process("Resources") ]
-            )
+            resources: [.process("Resources") ]
+        )
           
     ]
 )

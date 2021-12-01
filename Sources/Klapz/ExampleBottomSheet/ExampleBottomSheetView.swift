@@ -127,7 +127,7 @@ public class ExampleBottomSheetView: UIView {
     
     lazy var contentStackOffer: UIStackView = {
         
-        let catImage3 = UIImage(named: "offerimage.png")
+        let catImage3 = UIImage(named: "offerimage.png", in: Bundle.module, compatibleWith: nil)
         let containerViewtext1 = UIView(frame: CGRect(x:0,y:0,width:50,height:50))
         var loginrto1 = UIImageView()
         containerViewtext1.addSubview(loginrto1)
@@ -261,8 +261,9 @@ public class ExampleBottomSheetView: UIView {
 
     
     lazy var IntroStack: UIStackView = {
-        let catImage2 = UIImage(named: "noti.png",in: .module, compatibleWith: nil)
+        let catImage2 = UIImage(named: "noti.png", in: Bundle.module, compatibleWith: nil)
         let containerViewtext = UIView(frame: CGRect(x:0,y:0,width:50,height:50))
+        
         var loginrto = UIImageView()
         containerViewtext.addSubview(loginrto)
         loginrto.contentMode = UIView.ContentMode.scaleAspectFit
@@ -278,7 +279,7 @@ public class ExampleBottomSheetView: UIView {
         stacktest.translatesAutoresizingMaskIntoConstraints = false
         
         
-        let catImage3 = UIImage(named: "klap2.png")
+        let catImage3 = UIImage(named: "klap2.png", in: Bundle.module, compatibleWith: nil)
         let containerViewtext1 = UIView(frame: CGRect(x:0,y:0,width:50,height:50))
         var loginrto1 = UIImageView()
         containerViewtext1.addSubview(loginrto1)
@@ -304,7 +305,7 @@ public class ExampleBottomSheetView: UIView {
     
   // MARK: - Init
   
-override init(frame: CGRect) {
+public override init(frame: CGRect) {
     super.init(frame: frame)
     
     self.textField.placeholder = "Enter phone number"
@@ -375,13 +376,13 @@ override init(frame: CGRect) {
     KlapzField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
     
     
-    let catImage = UIImage(named: "klapzicon.png")
+    let catImage = UIImage(named: "klapzicon.png",in: Bundle.module, compatibleWith: nil)
     
     myImageView.contentMode = UIView.ContentMode.scaleAspectFit
     myImageView.image = catImage
     
     
-    let catImage2 = UIImage(named: "wihteklapz.png")
+    let catImage2 = UIImage(named: "wihteklapz.png", in: Bundle.module, compatibleWith: nil)
     logowhite.contentMode = UIView.ContentMode.scaleAspectFit
     logowhite.frame.size = CGSize(width: 54, height: 54)
     logowhite.image = catImage2
@@ -903,7 +904,7 @@ private func setupOtp() {
 
 // MARK: - Styling Functions
 
-extension ExampleBottomSheetView {
+public extension ExampleBottomSheetView {
   static func styleView(_ view: ExampleBottomSheetView) {
     if #available(iOS 13, *) {
       view.backgroundColor = UIColor(hexString: "#ff7f57")
@@ -1121,7 +1122,7 @@ extension ExampleBottomSheetView {
 }
 
 
-class PaddingLabel: UILabel {
+public class PaddingLabel: UILabel {
     
     var insets = UIEdgeInsets.zero
     
@@ -1131,11 +1132,11 @@ class PaddingLabel: UILabel {
         insets = UIEdgeInsets(top: top, left: left, bottom: bottom, right: right)
     }
     
-    override func drawText(in rect: CGRect) {
+    public override func drawText(in rect: CGRect) {
         super.drawText(in: rect.inset(by: insets))
     }
     
-    override var intrinsicContentSize: CGSize {
+    public override var intrinsicContentSize: CGSize {
         get {
             var contentSize = super.intrinsicContentSize
             contentSize.height += insets.top + insets.bottom

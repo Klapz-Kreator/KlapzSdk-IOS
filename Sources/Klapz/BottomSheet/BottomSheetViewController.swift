@@ -5,7 +5,7 @@ import UIKit
 public final class BottomSheetViewController: UIViewController {
   
   /// The `BottomSheetView` containing user content.
-  private let bottomSheetView: BottomSheetView = {
+  public let bottomSheetView: BottomSheetView = {
     let view = BottomSheetView()
     view.accessibilityIdentifier = "BottomSheetContainer"
     return view
