@@ -665,7 +665,7 @@ public override init(frame: CGRect) {
                 ]] as Dictionary<String, AnyObject>
         }else{
             params = ["claps":[
-                "count":KlapzCount
+                "count":KlapzCount,
                 "title":  KlapzConfig["title"] as! String,
                 "public": true,
                 "Key": "kuaduekwamk1ah",
