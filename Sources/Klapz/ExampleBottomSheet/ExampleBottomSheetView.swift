@@ -613,6 +613,7 @@ public override init(frame: CGRect) {
                     {
                     case 200:
                         token = httpResponse.allHeaderFields["auth-token"] as! String
+                        defaults.set(token, forKey: "token")
                         let response = NSString (data: receivedData, encoding: String.Encoding.utf8.rawValue)
                         print("save profile POST request got response")
                         let json = try? JSONSerialization.jsonObject(with: receivedData) as! Dictionary<String, AnyObject>
