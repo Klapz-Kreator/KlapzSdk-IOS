@@ -707,7 +707,7 @@ public override init(frame: CGRect) {
             request.timeoutInterval = 30
             request.addValue("application/json", forHTTPHeaderField: "Content-Type")
             request.addValue("application/json", forHTTPHeaderField: "Accept")
-             request.addValue("auth-token", forHTTPHeaderField: token)
+            request.addValue(token, forHTTPHeaderField: "auth-token")
             request.httpBody  = try! JSONSerialization.data(withJSONObject: params, options: [])
 
      
@@ -766,7 +766,7 @@ public override init(frame: CGRect) {
             request.timeoutInterval = 30
             request.addValue("application/json", forHTTPHeaderField: "Content-Type")
             request.addValue("application/json", forHTTPHeaderField: "Accept")
-             request.addValue("auth-token", forHTTPHeaderField: token)
+             request.addValue(token, forHTTPHeaderField: "auth-token")
 //            request.httpBody  = try! JSONSerialization.data(withJSONObject: params, options: [])
 
      
@@ -816,7 +816,9 @@ public override init(frame: CGRect) {
             request.timeoutInterval = 30
             request.addValue("application/json", forHTTPHeaderField: "Content-Type")
             request.addValue("application/json", forHTTPHeaderField: "Accept")
-             request.addValue("auth-token", forHTTPHeaderField: token)
+            request.addValue(token, forHTTPHeaderField: "auth-token")
+            print("url string is \(urlString)")
+            print(token)
 //            request.httpBody  = try! JSONSerialization.data(withJSONObject: params, options: [])
 
      
