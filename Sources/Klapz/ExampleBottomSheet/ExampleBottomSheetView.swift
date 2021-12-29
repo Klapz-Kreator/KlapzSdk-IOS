@@ -807,7 +807,7 @@ public override init(frame: CGRect) {
         params = ["claps":""] as Dictionary<String, AnyObject>
    
         print(params)
-        let urlString = NSString(format: KlapxUrl + "user/profile?props=balanceClaps&apiFrom=ios&buildNumber=3" as NSString);
+        let urlString = NSString(format: KlapxUrl + "user/profile?props=balanceClaps&apiFrom=ios&buildNumber=3&apiKey=kuaduekwamk1ah" as NSString);
             print("url string is \(urlString)")
             print(token)
             let request : NSMutableURLRequest = NSMutableURLRequest()
