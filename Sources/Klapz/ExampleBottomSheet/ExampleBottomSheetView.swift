@@ -150,10 +150,13 @@ public class ExampleBottomSheetView: UIView {
         var loginrto1 = UIImageView()
         containerViewtext1.addSubview(loginrto1)
         loginrto1.contentMode = UIView.ContentMode.scaleAspectFit
-        loginrto1.frame.size = CGSize(width: 30, height: 30)
-        loginrto1.frame.size.width = 30
-        loginrto1.frame.size.height = 30
+        loginrto1.frame.size = CGSize(width: 200, height: 200)
+        loginrto1.frame.size.width = 200
+        loginrto1.frame.size.height = 200
         loginrto1.image = catImage3
+        loginrto1.center = containerViewtext1.center
+        loginrto1.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        loginrto1.widthAnchor.constraint(equalToConstant: 200).isActive = true
         
         var spacela1 = PaddingLabel()
         spacela1.text = ""
