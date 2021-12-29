@@ -40,7 +40,7 @@ public class ExampleBottomSheetView: UIView {
     
     let myImageView:UIImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 500.00, height: 30.00))
     let logowhite:UIImageView = UIImageView()
-    let offerrs:UIImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 500.00, height: 30.00))
+    let offer:UIImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 500.00, height: 30.00))
     let offerbuytton = UIButton(type: .system)
     let buttonverify = UIButton(type: .system)
     var textFieldmulti = MultilineTextField(frame: CGRect(x: 0, y: 0, width: 500.00, height: 150.00))
@@ -145,7 +145,7 @@ public class ExampleBottomSheetView: UIView {
     
     lazy var contentStackOffer: UIStackView = {
         
-        let catImage3 = UIImage(named: "offerrs.png")
+        let catImage3 = UIImage(named: "offerrs.png", in: Bundle.module, compatibleWith: nil)
         let containerViewtext1 = UIView(frame: CGRect(x:0,y:0,width:50,height:50))
         var loginrto1 = UIImageView()
         containerViewtext1.addSubview(loginrto1)
