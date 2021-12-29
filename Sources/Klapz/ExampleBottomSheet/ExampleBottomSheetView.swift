@@ -467,6 +467,12 @@ public override init(frame: CGRect) {
 //    bottomTextField.isFlagFixed = true
 //    // Setting custom format pattern for some countries
 //    bottomTextField.customPhoneFormats = ["IN": "## #### #########"]
+    if(token != ""){
+        ExampleBottomSheetView.styleTitleLabel(
+          titleLabel,
+          with: "Klapz Club"
+        )
+    }
   }
   
     func getOwningViewController() -> UIViewController? {
