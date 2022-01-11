@@ -881,8 +881,12 @@ public override init(frame: CGRect) {
 
                     default:
                         let response = NSString (data: receivedData, encoding: String.Encoding.utf8.rawValue)
-//                        defaults.set("", forKey: "token")
-//                        token = ""
+                        defaults.set("", forKey: "token")
+                        token = ""
+                        DispatchQueue.main.async {
+                            contentStackKlapz.removeFromSuperview()
+                            setupbuttonhappy()
+                        }
                         UserDefaults.standard.removeObject(forKey: "token")
                         DispatchQueue.main.async {
                               
