@@ -770,11 +770,8 @@ public override init(frame: CGRect) {
                     default:
                         let response = NSString (data: receivedData, encoding: String.Encoding.utf8.rawValue)
                         print("save profile POST request got error response \(response)")
-                        let json = try? JSONSerialization.jsonObject(with: receivedData) as! Dictionary<String, AnyObject>
-                        if(json?["errors"] != nil){
-                            DispatchQueue.main.async {
-                                ErroKlapShow(errorMessage: json?["errorMessage"] as! String)
-                            }
+                        DispatchQueue.main.async {
+                            ErroKlapShow(errorMessage: "You have no Klapz left in your account. Please, buy some more Klapz.")
                         }
 
                     }
