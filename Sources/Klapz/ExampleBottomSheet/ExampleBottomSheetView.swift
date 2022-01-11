@@ -58,7 +58,7 @@ public class ExampleBottomSheetView: UIView {
     let errortext = PaddingLabel()
     let errortextmain = PaddingLabel()
     var token = ""
-    let KlapxUrl = "https://dev.klapz.club/"
+    var KlapxUrl = "https://dev.klapz.club/"
 //    let UIViewController =
     let textField = TextFieldWithPadding(frame: CGRect(x: 0, y: 0, width: 500.00, height: 30.00));
     
@@ -355,6 +355,10 @@ public override init(frame: CGRect) {
         token = name ?? ""
     }
     
+    if(KlapzConfig["Envirment"] as! String == "Production"){
+        KlapxUrl = "https://klapz.club/"
+    }
+    
     FontBlaster.blast(bundle: .module)
     
     self.textField.placeholder = "Enter phone number"
@@ -476,8 +480,24 @@ public override init(frame: CGRect) {
           with: "Klapz Club"
         )
     }
+    
+    //        ExampleBottomSheetView.styleSmalltexterror(
+    //          errortextmain,
+    //          with: "You have only 0 claps left. Can't contribute 2 claps"
+    //        )
+            errortextmain.isHidden = true
+            errobutton.isHidden = true
   }
   
+    private func ErroKlapShow(errorMessage: String) {
+//      ExampleBottomSheetView.styleViewwhite(self)
+        ExampleBottomSheetView.styleSmalltexterrorstateerror(
+          errortextmain,
+          with: errorMessage
+        )
+        errortextmain.isHidden = false
+    }
+    
     func getOwningViewController() -> UIViewController? {
       var nextResponser = self
       while let next = nextResponser.next {
@@ -539,7 +559,7 @@ public override init(frame: CGRect) {
         let mobile = (bottomTextField.selectedCountry.phoneCode as String) + textField.text! ?? ""
         let params = ["user":["mobile": mobile]] as Dictionary<String, AnyObject>
         print(params)
-        let urlString = NSString(format: KlapxUrl + "auth/request_mobile_otp?apiKey=kuaduekwamk1ah&apiFrom=ios&buildNumber=3" as NSString);
+        let urlString = NSString(format: KlapxUrl + "auth/request_mobile_otp?apiKey="+(KlapzConfig["key"] as! String)+"&apiFrom=ios&buildNumber=3" as NSString);
             print("url string is \(urlString)")
             let request : NSMutableURLRequest = NSMutableURLRequest()
             request.url = NSURL(string: NSString(format: "%@", urlString)as String) as URL?
@@ -598,7 +618,7 @@ public override init(frame: CGRect) {
         let mobile = (bottomTextField.selectedCountry.phoneCode as String) + textField.text! ?? ""
         let params = ["user":["mobile": mobile,"otp":otp]] as Dictionary<String, AnyObject>
         print(params)
-        let urlString = NSString(format: KlapxUrl + "auth/verify_mobile_otp.json?apiKey=kuaduekwamk1ah&apiFrom=ios&buildNumber=3" as NSString);
+        let urlString = NSString(format: KlapxUrl + "auth/verify_mobile_otp.json?apiKey="+(KlapzConfig["key"] as! String)+"&apiFrom=ios&buildNumber=3" as NSString);
             print("url string is \(urlString)")
             let request : NSMutableURLRequest = NSMutableURLRequest()
             request.url = NSURL(string: NSString(format: "%@", urlString)as String) as URL?
@@ -681,7 +701,7 @@ public override init(frame: CGRect) {
                 "count":KlapzCount,
                 "title":  KlapzConfig["title"] as! String,
                 "public": true,
-                "Key": "kuaduekwamk1ah",
+                "Key": KlapzConfig["key"],
                 "fromWhere": "externalApp",
                 "expression": Klapxexpretion.text,
                 "contentURL":  KlapzConfig["Url"] as! String,
@@ -692,7 +712,7 @@ public override init(frame: CGRect) {
                 "count":KlapzCount,
                 "title":  KlapzConfig["title"] as! String,
                 "public": true,
-                "Key": "kuaduekwamk1ah",
+                "Key": KlapzConfig["key"],
                 "fromWhere": "externalApp",
                 "expression": Klapxexpretion.text,
                 
@@ -708,7 +728,7 @@ public override init(frame: CGRect) {
         }
    
         print(params)
-        let urlString = NSString(format: KlapxUrl + "claps/expend?apiKey=kuaduekwamk1ah&apiFrom=ios&buildNumber=3" as NSString);
+        let urlString = NSString(format: KlapxUrl + "claps/expend?apiKey="+(KlapzConfig["key"] as! String)+"&apiFrom=ios&buildNumber=3" as NSString);
             print("url string is \(urlString)")
             print(token)
             let request : NSMutableURLRequest = NSMutableURLRequest()
@@ -729,6 +749,7 @@ public override init(frame: CGRect) {
                     else {
                             print("error: not a valid http response ========")
                             print(response)
+//                                errobutton.isHidden = false
                             return
                     }
 
@@ -750,6 +771,13 @@ public override init(frame: CGRect) {
                     default:
                         let response = NSString (data: receivedData, encoding: String.Encoding.utf8.rawValue)
                         print("save profile POST request got error response \(response)")
+                        let json = try? JSONSerialization.jsonObject(with: receivedData) as! Dictionary<String, AnyObject>
+                        if(json?["errors"] != nil){
+                            DispatchQueue.main.async {
+                                ErroKlapShow(errorMessage: json?["errorMessage"] as! String)
+                            }
+                        }
+
                     }
             }
             dataTask.resume()
@@ -817,7 +845,7 @@ public override init(frame: CGRect) {
         params = ["claps":""] as Dictionary<String, AnyObject>
    
         print(params)
-        let urlString = NSString(format: KlapxUrl + "user/profile?props=balanceClaps&apiFrom=ios&buildNumber=3&apiKey=kuaduekwamk1ah" as NSString);
+        let urlString = NSString(format: KlapxUrl + "user/profile?props=balanceClaps&apiFrom=ios&buildNumber=3&apiKey="+(KlapzConfig["key"] as! String) as NSString);
             print("url string is \(urlString)")
             print(token)
             let request : NSMutableURLRequest = NSMutableURLRequest()
@@ -1324,6 +1352,14 @@ public extension ExampleBottomSheetView {
       label.padding(20, 20, 0, 0)
       label.textColor =  UIColor(hexString: "#FFFFFF")
       label.textAlignment = .left
+    }
+    
+    static func styleSmalltexterrorstateerror(_ label: UILabel, with text: String?) {
+      label.text = text
+      label.numberOfLines = 0
+      label.font = UIFont(name:"Montserrat-Regular", size: 14.0)
+      label.textColor =  UIColor(hexString: "#ffffff")
+      label.textAlignment = .center
     }
     
     static func styleSmallcount(_ label: UILabel, with text: String?) {
