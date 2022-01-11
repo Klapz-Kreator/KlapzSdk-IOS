@@ -84,6 +84,9 @@ public class ExampleBottomSheetView: UIView {
         )
         KlapzField.text = String(KlapzConfig["klapz"] as! Int)
         KlapzCount = String(KlapzConfig["klapz"] as! Int)
+        if(KlapzConfig["Envirment"] as! String == "Production"){
+            KlapxUrl = "https://klapz.club/"
+        }
         print("Call api")
         print(KlapzConfig)
     }
@@ -353,10 +356,6 @@ public override init(frame: CGRect) {
     let name = defaults.string(forKey: "token")
     if(name != nil){
         token = name ?? ""
-    }
-    
-    if(KlapzConfig["Envirment"] as! String == "Production"){
-        KlapxUrl = "https://klapz.club/"
     }
     
     FontBlaster.blast(bundle: .module)
