@@ -770,9 +770,9 @@ public override init(frame: CGRect) {
                     default:
                         let response = NSString (data: receivedData, encoding: String.Encoding.utf8.rawValue)
                         print("save profile POST request got error response \(response)")
-                        DispatchQueue.main.async {
-                            ErroKlapShow(errorMessage: "You have no Klapz left in your account. Please, buy some more Klapz.")
-                        }
+//                        DispatchQueue.main.async {
+//                            ErroKlapShow(errorMessage: "You have no Klapz left in your account. Please, buy some more Klapz.")
+//                        }
 
                     }
             }
