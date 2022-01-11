@@ -650,6 +650,9 @@ public override init(frame: CGRect) {
                                     self.setupKlapz()
                             }
                         }
+                        DispatchQueue.main.async {
+                            ErroKlapShow(errorMessage: "")
+                        }
                         print(json?["user"] as? Dictionary<String, AnyObject>)
                         var user = json?["user"] as? Dictionary<String, AnyObject>
                         print(user?["balanceClaps"] as! Int)
@@ -878,8 +881,8 @@ public override init(frame: CGRect) {
 
                     default:
                         let response = NSString (data: receivedData, encoding: String.Encoding.utf8.rawValue)
-                        defaults.set("", forKey: "token")
-                        token = ""
+//                        defaults.set("", forKey: "token")
+//                        token = ""
                         UserDefaults.standard.removeObject(forKey: "token")
                         DispatchQueue.main.async {
                               
