@@ -58,7 +58,6 @@ public class ExampleBottomSheetView: UIView {
     let errortext = PaddingLabel()
     let errortextmain = PaddingLabel()
     var token = ""
-    let KlapxUrl = "https://dev.klapz.club/"
 //    let UIViewController =
     let textField = TextFieldWithPadding(frame: CGRect(x: 0, y: 0, width: 500.00, height: 30.00));
     
@@ -66,7 +65,7 @@ public class ExampleBottomSheetView: UIView {
         "key":"xxx",
         "PreferKlapz":"10,20,30",
     ]
-    
+    var KlapxUrl = "https://dev.klapz.club/"
     var KlapzresMain: (_ Klapxres : [String: Any]) -> Bool = { _ in return false  }
     
    
@@ -83,7 +82,7 @@ public class ExampleBottomSheetView: UIView {
                 with: KlapzConfig["title"] as! String
         )
         if(KlapzConfig["Envirment"] as! String == "Production"){
-                  KlapxUrl = "https://klapz.club/"
+                 KlapxUrl = "https://klapz.club/"
         }
         KlapzField.text = String(KlapzConfig["klapz"] as! Int)
         KlapzCount = String(KlapzConfig["klapz"] as! Int)
