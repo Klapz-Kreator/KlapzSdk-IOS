@@ -82,6 +82,9 @@ public class ExampleBottomSheetView: UIView {
                 titlerclab,
                 with: KlapzConfig["title"] as! String
         )
+        if(KlapzConfig["Envirment"] as! String == "Production"){
+                  KlapxUrl = "https://klapz.club/"
+        }
         KlapzField.text = String(KlapzConfig["klapz"] as! Int)
         KlapzCount = String(KlapzConfig["klapz"] as! Int)
         print("Call api")
@@ -539,7 +542,7 @@ public override init(frame: CGRect) {
         let mobile = (bottomTextField.selectedCountry.phoneCode as String) + textField.text! ?? ""
         let params = ["user":["mobile": mobile]] as Dictionary<String, AnyObject>
         print(params)
-        let urlString = NSString(format: KlapxUrl + "auth/request_mobile_otp?apiKey=kuaduekwamk1ah&apiFrom=ios&buildNumber=3" as NSString);
+        let urlString = NSString(format: KlapxUrl + "auth/request_mobile_otp?apiKey="+(KlapzConfig["key"] as! String)+"&apiFrom=ios&buildNumber=3" as NSString);
             print("url string is \(urlString)")
             let request : NSMutableURLRequest = NSMutableURLRequest()
             request.url = NSURL(string: NSString(format: "%@", urlString)as String) as URL?
@@ -598,7 +601,7 @@ public override init(frame: CGRect) {
         let mobile = (bottomTextField.selectedCountry.phoneCode as String) + textField.text! ?? ""
         let params = ["user":["mobile": mobile,"otp":otp]] as Dictionary<String, AnyObject>
         print(params)
-        let urlString = NSString(format: KlapxUrl + "auth/verify_mobile_otp.json?apiKey=kuaduekwamk1ah&apiFrom=ios&buildNumber=3" as NSString);
+        let urlString = NSString(format: KlapxUrl + "auth/verify_mobile_otp.json?apiKey="+(KlapzConfig["key"] as! String)+"&apiFrom=ios&buildNumber=3" as NSString);
             print("url string is \(urlString)")
             let request : NSMutableURLRequest = NSMutableURLRequest()
             request.url = NSURL(string: NSString(format: "%@", urlString)as String) as URL?
@@ -681,7 +684,7 @@ public override init(frame: CGRect) {
                 "count":KlapzCount,
                 "title":  KlapzConfig["title"] as! String,
                 "public": true,
-                "Key": "kuaduekwamk1ah",
+                "Key": (KlapzConfig["key"] as! String),
                 "fromWhere": "externalApp",
                 "expression": Klapxexpretion.text,
                 "contentURL":  KlapzConfig["Url"] as! String,
@@ -692,7 +695,7 @@ public override init(frame: CGRect) {
                 "count":KlapzCount,
                 "title":  KlapzConfig["title"] as! String,
                 "public": true,
-                "Key": "kuaduekwamk1ah",
+                "Key": (KlapzConfig["key"] as! String),
                 "fromWhere": "externalApp",
                 "expression": Klapxexpretion.text,
                 
@@ -708,7 +711,7 @@ public override init(frame: CGRect) {
         }
    
         print(params)
-        let urlString = NSString(format: KlapxUrl + "claps/expend?apiKey=kuaduekwamk1ah&apiFrom=ios&buildNumber=3" as NSString);
+        let urlString = NSString(format: KlapxUrl + "claps/expend?apiKey="+(KlapzConfig["key"] as! String)+"&apiFrom=ios&buildNumber=3" as NSString);
             print("url string is \(urlString)")
             print(token)
             let request : NSMutableURLRequest = NSMutableURLRequest()
@@ -817,7 +820,7 @@ public override init(frame: CGRect) {
         params = ["claps":""] as Dictionary<String, AnyObject>
    
         print(params)
-        let urlString = NSString(format: KlapxUrl + "user/profile?props=balanceClaps&apiFrom=ios&buildNumber=3&apiKey=kuaduekwamk1ah" as NSString);
+        let urlString = NSString(format: KlapxUrl + "user/profile?props=balanceClaps&apiFrom=ios&buildNumber=3&apiKey="+(KlapzConfig["key"] as! String)+"" as NSString);
             print("url string is \(urlString)")
             print(token)
             let request : NSMutableURLRequest = NSMutableURLRequest()
