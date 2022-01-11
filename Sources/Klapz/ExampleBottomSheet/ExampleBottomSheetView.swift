@@ -532,6 +532,14 @@ public override init(frame: CGRect) {
         }
         print(String(textField.text ?? "asd"))
     }
+    private func ErroKlapShow(errorMessage: String) {
+//      ExampleBottomSheetView.styleViewwhite(self)
+        ExampleBottomSheetView.styleSmalltexterrorstateerror(
+          errortextmain,
+          with: errorMessage
+        )
+        errortextmain.isHidden = false
+    }
     
     func Loginapi() {
         
@@ -751,6 +759,9 @@ public override init(frame: CGRect) {
 
                     default:
                         let response = NSString (data: receivedData, encoding: String.Encoding.utf8.rawValue)
+                        DispatchQueue.main.async {
+                            ErroKlapShow(errorMessage: "You have no Klapz left in your account. Please, buy some more Klapz.")
+                        }
                         print("save profile POST request got error response \(response)")
                     }
             }
@@ -1247,6 +1258,13 @@ public extension ExampleBottomSheetView {
       label.setContentHuggingPriority(.defaultHigh, for: .vertical)
     }
     
+    static func styleSmalltexterrorstateerror(_ label: UILabel, with text: String?) {
+         label.text = text
+         label.numberOfLines = 0
+         label.font = UIFont(name:"Montserrat-Regular", size: 14.0)
+         label.textColor =  UIColor(hexString: "#ffffff")
+         label.textAlignment = .center
+       }
     
     static func styleTitleCongo(_ label: PaddingLabel, with text: String?) {
       label.text = text
