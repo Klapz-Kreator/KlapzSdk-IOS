@@ -86,6 +86,7 @@ public class ExampleBottomSheetView: UIView {
         }
         KlapzField.text = String(KlapzConfig["klapz"] as! Int)
         KlapzCount = String(KlapzConfig["klapz"] as! Int)
+        UserDetails()
         print("Call api")
         print(KlapzConfig)
     }
@@ -966,7 +967,7 @@ public override init(frame: CGRect) {
     }else{
         
 //        Logout()
-        UserDetails()
+        
 //        addSubview(IntroStack)
 //        setConstraintsintro()
 //        setupbuttonhappy()
