@@ -86,7 +86,7 @@ public class ExampleBottomSheetView: UIView {
         }
         KlapzField.text = String(KlapzConfig["klapz"] as! Int)
         KlapzCount = String(KlapzConfig["klapz"] as! Int)
-        if(token !=""){
+        if(token != ""){
             UserDetails()
         }
         print("Call api")
