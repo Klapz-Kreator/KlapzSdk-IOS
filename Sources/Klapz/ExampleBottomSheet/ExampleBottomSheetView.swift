@@ -423,7 +423,8 @@ public override init(frame: CGRect) {
     buttonklapz.addTarget(self, action: #selector(buttonVerifyKlapz), for: .touchUpInside)
     happytogo.addTarget(self, action: #selector(buttonhappy), for: .touchUpInside)
     offerbuytton.addTarget(self, action: #selector(offerbuyttonclick), for: .touchUpInside)
-    
+    DownloadKlapz.addTarget(self, action: #selector(DownloadKlapzClick), for: .touchUpInside)
+    errobutton2.addTarget(self, action: #selector(DownloadKlapzClick), for: .touchUpInside)
     
     setup()
     
@@ -942,7 +943,18 @@ public override init(frame: CGRect) {
     @objc func offerbuyttonclick(){
         setupKlapz()
      }
-    
+    @objc func DownloadKlapzClick(){
+        if let url = URL(string: "itms-apps://itunes.apple.com/app/id1546369266"),
+            UIApplication.shared.canOpenURL(url){
+            UIApplication.shared.open(url, options: [:]) { (opened) in
+                if(opened){
+                    print("App Store Opened")
+                }
+            }
+        } else {
+            print("Can't Open URL on Simulator")
+        }
+    }
     
     @objc func Preferklapz(_ sender : UIButton) {
         print(sender.tag)
