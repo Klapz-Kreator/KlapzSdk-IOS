@@ -271,7 +271,6 @@ public class ExampleBottomSheetView: UIView {
         spacela2.padding(10, 0, 0, 0)
         
         
-       
         let cb = Checkbox(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
         cb.checkmarkStyle = .tick
         cb.backgroundColor = UIColor(hexString: "#FFFFFF")
@@ -280,14 +279,18 @@ public class ExampleBottomSheetView: UIView {
         cb.checkmarkColor = UIColor(hexString: "#ff946d")
         cb.isChecked = true
         
-        let containerViewtext1 = UIView(frame: CGRect(x:0,y:0,width:30,height:30))
+        let containerViewtext1 = UIView()
         containerViewtext1.addSubview(cb)
-        containerViewtext1.heightAnchor.constraint(equalToConstant: 20).isActive = true
-        containerViewtext1.widthAnchor.constraint(equalToConstant: 40).isActive = true
-        
+        frinds.addConstraint(frinds.heightAnchor.constraint(equalToConstant: 40))
+        containerViewtext1.addConstraint(containerViewtext1.heightAnchor.constraint(equalToConstant: 20))
         let stacktest1 = UIStackView(arrangedSubviews: [containerViewtext1,frinds])
+        frinds.numberOfLines = 2
         stacktest1.axis = .horizontal
-        stacktest1.spacing = 16
+//        stacktest1.spacing = -45
+        stacktest1.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        stacktest1.widthAnchor.constraint(equalToConstant: 40).isActive = true
+//        stacktest1.addConstraint(stacktest1.heightAnchor.constraint(equalToConstant: 40))
+//        stacktest1.addConstraint(stacktest1.widthAnchor.constraint(equalToConstant: 40))
         stacktest1.alignment = .center
         stacktest1.distribution = .fillProportionally
         stacktest1.translatesAutoresizingMaskIntoConstraints = false
