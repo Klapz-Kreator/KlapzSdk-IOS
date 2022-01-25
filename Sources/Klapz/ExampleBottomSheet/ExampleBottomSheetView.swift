@@ -24,6 +24,8 @@ public class ExampleBottomSheetView: UIView {
   let resend = PaddingLabel()
   let errobutton = UIButton(type: .system)
     let errobutton2 = UIButton(type: .system)
+    var spinner = UIActivityIndicatorView(style : .whiteLarge)
+    var loadingView: UIView = UIView()
     let thnxtext = PaddingLabel()
     var KlapzCount = "2"
      var KlapzBalance = 1000
@@ -131,7 +133,7 @@ public class ExampleBottomSheetView: UIView {
         textField.leftView = stacktest
 
         textField.leftViewMode = .always
-        let stack = UIStackView(arrangedSubviews: [Header,descriptionLabel,descibelable,textField,errortext, button])
+        let stack = UIStackView(arrangedSubviews: [Header,descriptionLabel,descibelable,textField,errortext, button,spinner])
         stack.axis = .vertical
         stack.spacing = 16
     //    stack.setCustomSpacing(24, after: descriptionLabel)
@@ -141,7 +143,7 @@ public class ExampleBottomSheetView: UIView {
     
     
     lazy var contentStackotp: UIStackView = {
-      let stack = UIStackView(arrangedSubviews: [Header , descriptionLabelOTP,OTPField,errortextmain,resend,buttonverify,])
+      let stack = UIStackView(arrangedSubviews: [Header , descriptionLabelOTP,OTPField,errortextmain,resend,buttonverify,spinner])
       stack.axis = .vertical
       stack.spacing = 16
     //    stack.setCustomSpacing(24, after: descriptionLabel)
@@ -295,7 +297,7 @@ public class ExampleBottomSheetView: UIView {
         stacktest1.distribution = .fillProportionally
         stacktest1.translatesAutoresizingMaskIntoConstraints = false
         
-      let stack = UIStackView(arrangedSubviews: [Header , titlerclab,textFieldmulti,spacela,goldBorderedUIView,spacela1,balanceKlapz,stacktest1,buttonklapz,errobutton2,spacela2,errortextmain,errobutton])
+      let stack = UIStackView(arrangedSubviews: [Header , titlerclab,textFieldmulti,spacela,goldBorderedUIView,spacela1,balanceKlapz,stacktest1,buttonklapz,spinner,errobutton2,spacela2,errortextmain,errobutton])
       stack.axis = .vertical
       stack.spacing = 16
     //    stack.setCustomSpacing(24, after: descriptionLabel)
@@ -431,7 +433,8 @@ public override init(frame: CGRect) {
     errobutton2.addTarget(self, action: #selector(DownloadKlapzClick), for: .touchUpInside)
     
     setup()
-    
+    showActivityIndicator()
+    self.spinner.isHidden = true
     KlapzField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
     
     
@@ -550,7 +553,10 @@ public override init(frame: CGRect) {
     }
     
     func Loginapi() {
-        
+        DispatchQueue.main.async {
+            self.spinner.isHidden = false
+            self.button.isHidden = true
+        }
         let configuration = URLSessionConfiguration .default
         let session = URLSession(configuration: configuration)
         print(bottomTextField.selectedCountry)
@@ -575,6 +581,10 @@ public override init(frame: CGRect) {
             guard let httpResponse = response as? HTTPURLResponse, let receivedData = data
                     else {
                             print("error: not a valid http response ========")
+                            DispatchQueue.main.async {
+                                self.spinner.isHidden = true
+                                self.button.isHidden = false
+                            }
                             return
                     }
 
@@ -588,7 +598,10 @@ public override init(frame: CGRect) {
                             self.errortext.isHidden = true // show
                             self.setupOtp()
                         }
-      
+                        DispatchQueue.main.async {
+                            self.spinner.isHidden = true
+                            self.button.isHidden = false
+                        }
                         print(response)
 
                     default:
@@ -598,6 +611,10 @@ public override init(frame: CGRect) {
                               with: "Please enter a valid mobile number"
                             )
                             self.errortext.isHidden = false
+                        }
+                        DispatchQueue.main.async {
+                            self.spinner.isHidden = true
+                            self.button.isHidden = false
                         }
                         let response = NSString (data: receivedData, encoding: String.Encoding.utf8.rawValue)
                         print("save profile POST request got error response \(response)")
@@ -609,7 +626,10 @@ public override init(frame: CGRect) {
     
     
     func OTPVefify(otp : String) {
-        
+        DispatchQueue.main.async {
+            self.spinner.isHidden = false
+            self.buttonverify.isHidden = true
+        }
         let configuration = URLSessionConfiguration .default
         let session = URLSession(configuration: configuration)
         print(bottomTextField.selectedCountry)
@@ -634,6 +654,10 @@ public override init(frame: CGRect) {
             guard let httpResponse = response as? HTTPURLResponse, let receivedData = data
                     else {
                             print("error: not a valid http response ========")
+                            DispatchQueue.main.async {
+                                self.spinner.isHidden = true
+                                self.buttonverify.isHidden = false
+                            }
                             return
                     }
 
@@ -661,6 +685,10 @@ public override init(frame: CGRect) {
                         DispatchQueue.main.async {
                             ErroKlapShow(errorMessage: "")
                         }
+                        DispatchQueue.main.async {
+                            self.spinner.isHidden = true
+                            self.buttonverify.isHidden = false
+                        }
                         print(json?["user"] as? Dictionary<String, AnyObject>)
                         var user = json?["user"] as? Dictionary<String, AnyObject>
                         print(user?["balanceClaps"] as! Int)
@@ -681,7 +709,10 @@ public override init(frame: CGRect) {
                             )
                             self.errortextmain.isHidden = false
                         }
-                        
+                        DispatchQueue.main.async {
+                            self.spinner.isHidden = true
+                            self.buttonverify.isHidden = false
+                        }
                         let response = NSString (data: receivedData, encoding: String.Encoding.utf8.rawValue)
                         print("save profile POST request got error response \(response)")
                     }
@@ -692,7 +723,10 @@ public override init(frame: CGRect) {
     
     
     func Klapz() {
-        
+        DispatchQueue.main.async {
+            self.spinner.isHidden = false
+            self.buttonklapz.isHidden = true
+        }
         let configuration = URLSessionConfiguration .default
         let session = URLSession(configuration: configuration)
         
@@ -750,13 +784,20 @@ public override init(frame: CGRect) {
                     else {
                             print("error: not a valid http response ========")
                             print(response)
+                            DispatchQueue.main.async {
+                                self.spinner.isHidden = true
+                                self.buttonklapz.isHidden = false
+                            }
                             return
                     }
 
                     switch (httpResponse.statusCode)
                     {
                     case 200:
-
+                        DispatchQueue.main.async {
+                            self.spinner.isHidden = true
+                            self.buttonklapz.isHidden = false
+                        }
                         let response = NSString (data: receivedData, encoding: String.Encoding.utf8.rawValue)
                         print("save profile POST request got response")
                         let json = try? JSONSerialization.jsonObject(with: receivedData) as! Dictionary<String, AnyObject>
@@ -772,6 +813,10 @@ public override init(frame: CGRect) {
                         let response = NSString (data: receivedData, encoding: String.Encoding.utf8.rawValue)
                         DispatchQueue.main.async {
                             ErroKlapShow(errorMessage: "You have no Klapz left in your account. Please, buy some more Klapz.")
+                        }
+                        DispatchQueue.main.async {
+                            self.spinner.isHidden = true
+                            self.buttonklapz.isHidden = false
                         }
                         print("save profile POST request got error response \(response)")
                     }
@@ -831,7 +876,21 @@ public override init(frame: CGRect) {
             dataTask.resume()
         
     }
-    
+    func showActivityIndicator() {
+            self.loadingView = UIView()
+            self.loadingView.frame = CGRect(x: 0.0, y: 0.0, width: 100.0, height: 100.0)
+            self.loadingView.center = center
+            self.loadingView.backgroundColor = UIColor(named: "#444444")
+            self.loadingView.alpha = 0.7
+            self.loadingView.clipsToBounds = true
+            self.loadingView.layer.cornerRadius = 10
+
+            self.spinner = UIActivityIndicatorView(style: .whiteLarge)
+            self.spinner.frame = CGRect(x: 0.0, y: 0.0, width: 80.0, height: 80.0)
+            self.spinner.center = CGPoint(x:self.loadingView.bounds.size.width / 2, y:self.loadingView.bounds.size.height / 2)
+            self.loadingView.addSubview(self.spinner)
+            self.spinner.startAnimating()
+    }
     func UserDetails()  {
         
         let configuration = URLSessionConfiguration .default
