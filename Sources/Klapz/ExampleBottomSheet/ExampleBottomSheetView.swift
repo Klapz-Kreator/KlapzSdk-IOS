@@ -381,6 +381,7 @@ public override init(frame: CGRect) {
     textField.keyboardType = .numberPad
     
     self.OTPField.placeholder = "Enter Code"
+    self.OTPField..isSecureTextEntry = true
     OTPField.frame = OTPField.frame.inset(by: UIEdgeInsets(top: .zero, left: 10, bottom: 5.0, right: .zero))
     OTPField.addConstraint(OTPField.heightAnchor.constraint(equalToConstant: 56))
     self.OTPField.textColor =  UIColor(hexString: "#ffffff")
@@ -1089,7 +1090,7 @@ private func setupOtp() {
     
     ExampleBottomSheetView.styleSmallcount(
      balanceKlapz,
-      with: "Your Klapz balance: 5"
+      with: "Your Klapz balance: 0"
     )
     ExampleBottomSheetView.styleTitleCongo(
       congrasulaiton,
