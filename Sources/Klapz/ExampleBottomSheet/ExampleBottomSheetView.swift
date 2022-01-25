@@ -381,7 +381,7 @@ public override init(frame: CGRect) {
     textField.keyboardType = .numberPad
     
     self.OTPField.placeholder = "Enter Code"
-    self.OTPField..isSecureTextEntry = true
+    self.OTPField.isSecureTextEntry = true
     OTPField.frame = OTPField.frame.inset(by: UIEdgeInsets(top: .zero, left: 10, bottom: 5.0, right: .zero))
     OTPField.addConstraint(OTPField.heightAnchor.constraint(equalToConstant: 56))
     self.OTPField.textColor =  UIColor(hexString: "#ffffff")
