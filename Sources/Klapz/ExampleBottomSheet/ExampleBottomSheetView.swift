@@ -700,7 +700,11 @@ public override init(frame: CGRect) {
                         var onboardingComplete = userTemp?["onboardingComplete"] as! Bool
                         print("Asdasdasdasd",onboardingComplete)
                         if(onboardingComplete != true){
-                            defaults.set(json?["offer"], forKey: "offer")
+                            let name = json?["offer"];
+                            if(name != nil){
+                                defaults.set("offer", forKey: "offer")
+                            }
+                            
                             defaults.set("false", forKey: "onboardingComplete")
                             DispatchQueue.main.async {
                                 self.errortextmain.isHidden = true // show
