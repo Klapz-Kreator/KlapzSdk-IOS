@@ -1205,7 +1205,7 @@ public override init(frame: CGRect) {
     private func setupName() {
         ExampleBottomSheetView.styleTitleLabel(
           titleLabel,
-          with: "Klapz Club"
+          with: "A bit about you"
         )
       contentStackotp.removeFromSuperview()
       addSubview(contentStackName)
