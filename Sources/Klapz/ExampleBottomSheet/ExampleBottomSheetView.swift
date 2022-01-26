@@ -408,6 +408,20 @@ public override init(frame: CGRect) {
     OTPField.leftView = paddingView
     OTPField.leftViewMode = .always
     
+    self.NameField.placeholder = "Enter Name"
+    NameField.frame = NameField.frame.inset(by: UIEdgeInsets(top: .zero, left: 10, bottom: 5.0, right: .zero))
+    NameField.addConstraint(NameField.heightAnchor.constraint(equalToConstant: 56))
+    self.NameField.textColor =  UIColor(hexString: "#ffffff")
+    NameField.keyboardType = .default
+    NameField.attributedPlaceholder = NSAttributedString(string: "Enter Name",
+                                attributes: [NSAttributedString.Key.foregroundColor:UIColor(hexString: "#FFFFFF")])
+    self.NameField.tintColor =  UIColor(hexString: "#CCCCCC")
+    NameField.backgroundColor = UIColor(hexString: "#ff946d")
+    NameField.layer.cornerRadius = 10
+   
+    NameField.leftView = paddingView
+    NameField.leftViewMode = .always
+    
 //    self.Klapxexpretion.placeholder = "Tell us, what do you love about this book summary"
 //    self.Klapxexpretion.tintColor =  UIColor(hexString: "#CCCCCC")
     Klapxexpretion.frame = Klapxexpretion.frame.inset(by: UIEdgeInsets(top: .zero, left: 5.0, bottom: 5.0, right: .zero))
@@ -1353,6 +1367,7 @@ private func setupOtp() {
     
     ExampleBottomSheetView.styleButton(button)
     ExampleBottomSheetView.styleButtonMain(buttonverify)
+      ExampleBottomSheetView.styleButtonName(buttonName)
     ExampleBottomSheetView.styleButtonKlapz(buttonklapz)
     ExampleBottomSheetView.styleButtonDownload(DownloadKlapz)
     ExampleBottomSheetView.styleButtonhappy(happytogo)
@@ -1519,6 +1534,15 @@ public extension ExampleBottomSheetView {
       label.setContentHuggingPriority(.defaultHigh, for: .vertical)
     }
     
+    
+    static func styleButtonName(_ button: UIButton) {
+      button.backgroundColor = .white
+      button.setTitle("Save", for: .normal)
+      button.titleLabel?.font =  UIFont(name:"Montserrat-Regular", size: 18.0)
+      button.setTitleColor(  UIColor(hexString: "#ff7f57"), for: .normal)
+      button.contentEdgeInsets = UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
+      button.layer.cornerRadius = 8
+    }
   
   static func styleDescriptionLabel(_ label: UILabel, with text: String?) {
     label.text = text
