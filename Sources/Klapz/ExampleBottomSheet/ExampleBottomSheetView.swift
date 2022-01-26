@@ -1291,6 +1291,11 @@ private func setupOtp() {
       with: "Enter the 4 digit code"
     )
     
+      ExampleBottomSheetView.styleTitleLabel(
+             descriptionName,
+           with: "Welcome.Whats your name?"
+      )
+      
     ExampleBottomSheetView.styleTitleLabelthnx(
         thnxtext,
       with: "Thanks for Klapping."
