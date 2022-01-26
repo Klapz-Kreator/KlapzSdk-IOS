@@ -22,6 +22,7 @@ public class ExampleBottomSheetView: UIView {
   let descriptionLabel = UILabel()
   let descriptionLabelOTP = UILabel()
   let resend = PaddingLabel()
+    let descriptionName = UILabel()
   let errobutton = UIButton(type: .system)
     let errobutton2 = UIButton(type: .system)
     var spinner = UIActivityIndicatorView(style : .whiteLarge)
@@ -34,6 +35,7 @@ public class ExampleBottomSheetView: UIView {
     let frinds = PaddingLabel()
   let borderUI = CALayer()
   var bottomTextField = CountryPickerView(frame: CGRect(x: 0, y: 0, width: 200, height: 30.00))
+  var NameField: UITextField = UITextField(frame: CGRect(x: 0, y: 0, width: 500.00, height: 30.00));
   var text = ""
   var OTPField: UITextField = UITextField(frame: CGRect(x: 0, y: 0, width: 500.00, height: 30.00));
   var KlapzField: UITextField = UITextField();
@@ -53,6 +55,7 @@ public class ExampleBottomSheetView: UIView {
     var Klapxexpretion: UITextField = UITextField(frame: CGRect(x: 0, y: 0, width: 500.00, height: 150.00));
     let defaults = UserDefaults.standard
     let giveklapxtext = UILabel()
+    let buttonName = UIButton(type: .system)
     let getnotify = UILabel()
     let termandconditopn = PaddingLabel()
     let maintitletext = PaddingLabel()
@@ -144,6 +147,14 @@ public class ExampleBottomSheetView: UIView {
     
     lazy var contentStackotp: UIStackView = {
       let stack = UIStackView(arrangedSubviews: [Header , descriptionLabelOTP,OTPField,errortextmain,resend,buttonverify,spinner])
+      stack.axis = .vertical
+      stack.spacing = 16
+    //    stack.setCustomSpacing(24, after: descriptionLabel)
+      return stack
+    }()
+    
+    lazy var contentStackName: UIStackView = {
+      let stack = UIStackView(arrangedSubviews: [titleLabel, descriptionName,NameField,errortextmain,buttonName,spinner])
       stack.axis = .vertical
       stack.spacing = 16
     //    stack.setCustomSpacing(24, after: descriptionLabel)
@@ -426,6 +437,7 @@ public override init(frame: CGRect) {
     self.Header.layer.frame = CGRect(x: 0, y: self.Header.frame.size.height - 1, width: self.Header.frame.size.width, height: 1)
     button.addTarget(self, action: #selector(buttonClicked), for: .touchUpInside)
     buttonverify.addTarget(self, action: #selector(buttonVerifyClicked), for: .touchUpInside)
+    buttonName.addTarget(self, action: #selector(buttonNameClicked), for: .touchUpInside)
     buttonklapz.addTarget(self, action: #selector(buttonVerifyKlapz), for: .touchUpInside)
     happytogo.addTarget(self, action: #selector(buttonhappy), for: .touchUpInside)
     offerbuytton.addTarget(self, action: #selector(offerbuyttonclick), for: .touchUpInside)
@@ -670,18 +682,32 @@ public override init(frame: CGRect) {
                         print("save profile POST request got response")
                         let json = try? JSONSerialization.jsonObject(with: receivedData) as! Dictionary<String, AnyObject>
 
-                        let name = json?["offer"];
-                        if(name != nil){
-                                DispatchQueue.main.async {
-                                    self.errortextmain.isHidden = true // show
-                                    self.setupOffer()
-                                }
-                        }else{
+                        let userTemp = json?["user"] as? Dictionary<String, AnyObject>;
+                        var onboardingComplete = userTemp?["onboardingComplete"] as! Bool
+                        print("Asdasdasdasd",onboardingComplete)
+                        if(onboardingComplete != true){
+                            defaults.set(json?["offer"], forKey: "offer")
+                            defaults.set("false", forKey: "onboardingComplete")
                             DispatchQueue.main.async {
-                                    self.contentStackotp.removeFromSuperview()
-                                    self.setupKlapz()
+                                self.errortextmain.isHidden = true // show
+                                self.setupName()
+                            }
+                        }else{
+                            let name = json?["offer"];
+                            if(name != nil){
+                                    DispatchQueue.main.async {
+                                        self.errortextmain.isHidden = true // show
+                                        self.setupOffer()
+                                    }
+                            }else{
+                                DispatchQueue.main.async {
+                                        self.contentStackotp.removeFromSuperview()
+                                        self.setupKlapz()
+                                }
                             }
                         }
+                        
+          
                         DispatchQueue.main.async {
                             ErroKlapShow(errorMessage: "")
                         }
@@ -689,6 +715,7 @@ public override init(frame: CGRect) {
                             self.spinner.isHidden = true
                             self.buttonverify.isHidden = false
                         }
+                        
                         print(json?["user"] as? Dictionary<String, AnyObject>)
                         var user = json?["user"] as? Dictionary<String, AnyObject>
                         print(user?["balanceClaps"] as! Int)
@@ -712,6 +739,88 @@ public override init(frame: CGRect) {
                         DispatchQueue.main.async {
                             self.spinner.isHidden = true
                             self.buttonverify.isHidden = false
+                        }
+                        let response = NSString (data: receivedData, encoding: String.Encoding.utf8.rawValue)
+                        print("save profile POST request got error response \(response)")
+                    }
+            }
+            dataTask.resume()
+        
+    }
+    
+    
+    func NameVefify(name : String) {
+        DispatchQueue.main.async {
+            self.spinner.isHidden = false
+            self.buttonName.isHidden = true
+        }
+        let configuration = URLSessionConfiguration .default
+        let session = URLSession(configuration: configuration)
+        print(bottomTextField.selectedCountry)
+        let mobile = (bottomTextField.selectedCountry.phoneCode as String) + textField.text! ?? ""
+        let params = ["user":["firstName":name]] as Dictionary<String, AnyObject>
+        print(params)
+        let urlString = NSString(format: KlapxUrl + "user/profile?apiKey=kuaduekwamk1ah&apiFrom=ios&buildNumber=3" as NSString);
+            print("url string is \(urlString)")
+            let request : NSMutableURLRequest = NSMutableURLRequest()
+            request.url = NSURL(string: NSString(format: "%@", urlString)as String) as URL?
+            request.httpMethod = "POST"
+            request.timeoutInterval = 30
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.addValue("application/json", forHTTPHeaderField: "Accept")
+            request.addValue(token, forHTTPHeaderField: "auth-token")
+            request.httpBody  = try! JSONSerialization.data(withJSONObject: params, options: [])
+
+     
+        let dataTask = session.dataTask(with: request as URLRequest)
+        { [self]
+                    (data: Data?, response: URLResponse?, error: Error?) -> Void in
+                    // 1: Check HTTP Response for successful GET request
+            guard let httpResponse = response as? HTTPURLResponse, let receivedData = data
+                    else {
+                            print("error: not a valid http response ========")
+                            DispatchQueue.main.async {
+                                self.spinner.isHidden = true
+                                self.buttonName.isHidden = false
+                            }
+                            return
+                    }
+
+                    switch (httpResponse.statusCode)
+                    {
+                    case 200:
+                        print("save profile POST request got response \(response)")
+                        defaults.set("true", forKey: "onboardingComplete")
+                        DispatchQueue.main.async {
+                            self.spinner.isHidden = true
+                            self.buttonName.isHidden = false
+                        }
+                        let name = defaults.string(forKey: "offer")
+                        if(name != nil){
+                                DispatchQueue.main.async {
+                                    self.errortextmain.isHidden = true // show
+                                    self.contentStackName.removeFromSuperview()
+                                    self.setupOffer()
+                                }
+                        }else{
+                            DispatchQueue.main.async {
+                                    self.contentStackName.removeFromSuperview()
+                                    self.contentStackotp.removeFromSuperview()
+                                    self.setupKlapz()
+                            }
+                        }
+
+                    default:
+                        DispatchQueue.main.async {
+                            ExampleBottomSheetView.styleSmalltexterror(
+                              errortextmain,
+                              with: "Please enter a valid Name"
+                            )
+                            self.errortextmain.isHidden = false
+                        }
+                        DispatchQueue.main.async {
+                            self.spinner.isHidden = true
+                            self.buttonName.isHidden = false
                         }
                         let response = NSString (data: receivedData, encoding: String.Encoding.utf8.rawValue)
                         print("save profile POST request got error response \(response)")
@@ -986,6 +1095,21 @@ public override init(frame: CGRect) {
         
         print(String(OTPField.text ?? "asd"))
     }
+    @objc func buttonNameClicked() {
+        if(NameField.text == ""){
+            ExampleBottomSheetView.styleSmalltexterror(
+              errortextmain,
+              with: "Please enter a valid Name"
+            )
+            errortextmain.isHidden = false // show
+        }else{
+            NameVefify(name: NameField.text! ?? "---")
+//            errortextmain.isHidden = true // show
+//            setupOffer()
+        }
+        
+        print(String(NameField.text ?? "asd"))
+    }
     
     
     @objc func buttonVerifyKlapz() {
@@ -1049,7 +1173,19 @@ public override init(frame: CGRect) {
 //        setConstraintsintro()
 //        setupbuttonhappy()
 //        setupOtp()
-        setupKlapz()
+        let onboardingComplete = defaults.string(forKey: "onboardingComplete")
+        if(onboardingComplete == "true"){
+//            removeFromSuperview()
+            setupKlapz()
+        }else{
+            ExampleBottomSheetView.styleTitleLabel(
+              titleLabel,
+              with: "A bit about you"
+            )
+            addSubview(contentStackName)
+            setConstraintName()
+        }
+//        setupKlapz()
     }
     
   }
@@ -1064,7 +1200,18 @@ public override init(frame: CGRect) {
       setConstraintsOffer()
       
     }
+
+    
+    private func setupName() {
+        ExampleBottomSheetView.styleTitleLabel(
+          titleLabel,
+          with: "Klapz Club"
+        )
+      contentStackotp.removeFromSuperview()
+      addSubview(contentStackName)
+      setConstraintName()
       
+    }
     
     private func setupbuttonhappy() {
         IntroStack.removeFromSuperview()
@@ -1257,7 +1404,18 @@ private func setupOtp() {
   //      contentStack.bottomAnchor.constraint(equalTo: bottomAnchor)
       ])
     }
-  
+    func setConstraintName() {
+      contentStackName.translatesAutoresizingMaskIntoConstraints = false
+      
+      NSLayoutConstraint.activate([
+  //      contentStack.topAnchor.constraint(equalTo: topAnchor),
+        contentStackName.leadingAnchor.constraint(equalTo: leadingAnchor),
+        contentStackName.trailingAnchor.constraint(equalTo: trailingAnchor),
+  //      contentStack.bottomAnchor.constraint(equalTo: bottomAnchor)
+      ])
+
+  //    border.frame = CGRectMake(-1, -1, CGRectGetWidth(leftScrollView.frame), CGRectGetHeight(leftScrollView.frame)+2)
+    }
     
     
     func setConstraintsOtp() {
