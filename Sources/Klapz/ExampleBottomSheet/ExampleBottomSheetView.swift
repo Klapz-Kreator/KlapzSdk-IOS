@@ -716,6 +716,7 @@ public override init(frame: CGRect) {
                                 self.setupName()
                             }
                         }else{
+                            defaults.set("true", forKey: "onboardingComplete")
                             let name = json?["offer"];
                             if(name != nil){
                                     DispatchQueue.main.async {
