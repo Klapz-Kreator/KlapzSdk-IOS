@@ -212,10 +212,12 @@ public class ExampleBottomSheetView: UIView {
             button.titleLabel?.font =  UIFont(name:"Montserrat-Bold", size: 16.0)
             button.setTitleColor(  UIColor(hexString: "#ff7f57"), for: .normal)
             button.contentEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-            button.layer.cornerRadius = 20
+            button.layer.cornerRadius =  27
             button.tag = Int(value) ?? 10
-            button.heightAnchor.constraint(equalToConstant: 42).isActive = true
-            button.widthAnchor.constraint(equalToConstant: 42).isActive = true
+            button.heightAnchor.constraint(equalToConstant: 55).isActive = true
+            button.widthAnchor.constraint(equalToConstant: 55).isActive = true
+            button.addConstraint(button.heightAnchor.constraint(equalToConstant: 55))
+            button.addConstraint(button.widthAnchor.constraint(equalToConstant: 55))
             button.addTarget(self, action:#selector(Preferklapz(_:)), for: .touchUpInside)
             arrayOfButtons.append(button)
         }
@@ -276,13 +278,14 @@ public class ExampleBottomSheetView: UIView {
         var spacela1 = PaddingLabel()
         spacela1.text = ""
         spacela1.numberOfLines = 0
-        spacela1.padding(30, 0, 0, 0)
+        spacela1.padding(4, 0, 0, 0)
         
         var spacela2 = PaddingLabel()
         spacela2.text = ""
         spacela2.numberOfLines = 0
         spacela2.padding(10, 0, 0, 0)
         
+        var paddingView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 20))
         
         let cb = Checkbox(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
         cb.checkmarkStyle = .tick
@@ -308,7 +311,7 @@ public class ExampleBottomSheetView: UIView {
         stacktest1.distribution = .fillProportionally
         stacktest1.translatesAutoresizingMaskIntoConstraints = false
         
-      let stack = UIStackView(arrangedSubviews: [Header , titlerclab,textFieldmulti,spacela,goldBorderedUIView,spacela1,balanceKlapz,stacktest1,buttonklapz,spinner,errobutton2,spacela2,errortextmain,errobutton])
+        let stack = UIStackView(arrangedSubviews: [Header , titlerclab,textFieldmulti,spacela,goldBorderedUIView,spacela1,balanceKlapz,paddingView,stacktest1,buttonklapz,errobutton2,spacela2,errortextmain,errobutton])
       stack.axis = .vertical
       stack.spacing = 16
     //    stack.setCustomSpacing(24, after: descriptionLabel)
@@ -437,8 +440,8 @@ public override init(frame: CGRect) {
     
     self.KlapzField.placeholder = ""
     KlapzField.frame = KlapzField.frame.inset(by: UIEdgeInsets(top: .zero, left: 5.0, bottom: 5.0, right: .zero))
-    KlapzField.addConstraint(KlapzField.heightAnchor.constraint(equalToConstant: 50))
-    KlapzField.addConstraint(KlapzField.widthAnchor.constraint(equalToConstant: 50))
+    KlapzField.addConstraint(KlapzField.heightAnchor.constraint(equalToConstant: 55))
+    KlapzField.addConstraint(KlapzField.widthAnchor.constraint(equalToConstant: 55))
     self.KlapzField.textColor =  UIColor(hexString: "#ffffff")
     KlapzField.textAlignment = .center
     KlapzField.backgroundColor = UIColor(hexString: "#ff946d")
@@ -485,7 +488,9 @@ public override init(frame: CGRect) {
     spacela1.text = "  "
     spacela1.numberOfLines = 0
     spacela1.padding(0, 0,10, 10)
-    textFieldmulti.leftView = spacela1
+    var paddingViespace: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 0 ))
+    textFieldmulti.leftView = paddingViespace
+    textFieldmulti.textContainer.lineFragmentPadding = CGFloat(10)
     textFieldmulti.font  = UIFont(name:"Montserrat-Regular", size: 14.0)
     textFieldmulti.addConstraint(textFieldmulti.heightAnchor.constraint(equalToConstant: 120))
     self.textFieldmulti.textColor =  UIColor(hexString: "#FFFFFF")
@@ -1297,7 +1302,7 @@ private func setupOtp() {
     
       ExampleBottomSheetView.styleTitleLabel(
              descriptionName,
-           with: "Welcome.Whats your name?"
+           with: "Welcome. What’s your name?"
       )
       
     ExampleBottomSheetView.styleTitleLabelthnx(
